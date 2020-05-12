@@ -133,24 +133,24 @@ epoch = strftime("-h%s", time())
 
 
 function fabric(seal="z0")
-  if haskey(Harlequin.krewe, seal)
-    println("\n\tguitar-", seal, epoch)
-    for course in eadgbe(seal)
-      println("\t", course)
-    end
-  else
-    println("\n\t", seal, '?')
-  end 
+  try
+    if haskey(Harlequin.krewe, seal)
+      println("\n\tguitar-", seal, epoch)
+      for course in eadgbe(seal)
+        println("\t", course)
+      end
+    else
+      println("\n\t", seal, '?')
+    end 
+  catch anomaly
+    println("\ncause $anomaly")
+  end
 end
 
 
 if length(ARGS) > 0
   for seal in ARGS
-    try
-      fabric(seal)
-    catch anomaly
-      println("\ncause $anomaly")
-    end
+    fabric(seal)
   end
   println()
 else
