@@ -11,32 +11,30 @@ function tacit()
 end
 
 
-function populate(seal, specie)
-  try
-    span = length(specie)
-    if span >= 36
-      Harlequin.krewe[seal] = specie
-    else
-      println("\n\t$span? $specie")
-    end
-  catch anomaly
-    println("\ncause $anomaly")
+function place(seal, specie)
+  span = length(specie)
+  if span >= 36
+    Harlequin.krewe[seal] = specie
+  else
+    println("\n\t$span? $specie")
   end
 end
 
-populate("z0", tacit())
+place("z0", tacit())
 
 
 function catalog()
   try
-    i = 1
+    art = collect(keys(Harlequin.krewe))
+    sort!(art)
+    nth = 1
     println()
-    for k in keys(Harlequin.krewe)
-      print("\t", k)
-      if i % 7 == 0
+    for its in art
+      print("\t", its)
+      if nth % 7 == 0
         print("\n")
       end
-      i += 1
+      nth += 1
     end
   catch anomaly
     println("\ncause $anomaly")
@@ -44,10 +42,10 @@ function catalog()
 end
 
 
-function pitch(seal, ndx)
+function pitch(seal, nth)
   try
     specie = get(Harlequin.krewe, seal, tacit())
-    specie[ndx:end] * specie[1:ndx+1]
+    specie[nth:end] * specie[1:nth+1]
   catch anomaly
     println("\ncause $anomaly")
   end
@@ -136,13 +134,9 @@ epoch = strftime("-h%s", time())
 
 function fabric(seal="z0")
   if haskey(Harlequin.krewe, seal)
-    try
-      println("\n\tguitar-", seal, epoch)
-      for course in eadgbe(seal)
-        println("\t", course)
-      end
-    catch anomaly
-      println("\ncause $anomaly")
+    println("\n\tguitar-", seal, epoch)
+    for course in eadgbe(seal)
+      println("\t", course)
     end
   else
     println("\n\t", seal, '?')
