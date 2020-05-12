@@ -1,5 +1,8 @@
 
 
+module Bandana
+
+
 include("harlequin.jl")
 
 
@@ -8,11 +11,11 @@ function tacit()
 end
 
 
-function populate(sgn, specie)
+function populate(seal, specie)
   try
     span = length(specie)
     if span >= 36
-      krewe[sgn] = specie
+      Harlequin.krewe[seal] = specie
     else
       println("\n\t$span? $specie")
     end
@@ -24,11 +27,11 @@ end
 populate("z0", tacit())
 
 
-function menu()
+function catalog()
   try
     i = 1
     println()
-    for k in keys(krewe)
+    for k in keys(Harlequin.krewe)
       print("\t", k)
       if i % 7 == 0
         print("\n")
@@ -41,9 +44,9 @@ function menu()
 end
 
 
-function octavia(sgn, ndx)
+function pitch(seal, ndx)
   try
-    specie = get(krewe, sgn, tacit())
+    specie = get(Harlequin.krewe, seal, tacit())
     specie[ndx:end] * specie[1:ndx+1]
   catch anomaly
     println("\ncause $anomaly")
@@ -51,122 +54,117 @@ function octavia(sgn, ndx)
 end
 
 
-function hermit(sgn)
-  octavia(sgn, 1)
+function hermit(seal)
+  pitch(seal, 1)
 end
 
 
-function jovian(sgn)
-  octavia(sgn, 7)
+function jovian(seal)
+  pitch(seal, 7)
 end
 
 
-function copper(sgn)
-  octavia(sgn, 13)
+function copper(seal)
+  pitch(seal, 13)
 end
 
 
-function saturn(sgn)
-  octavia(sgn, 16)
+function saturn(seal)
+  pitch(seal, 16)
 end
 
 
-function gemini(sgn)
-  octavia(sgn, 19)
+function gemini(seal)
+  pitch(seal, 19)
 end
 
 
-function helios(sgn)
-  octavia(sgn, 22)
+function helios(seal)
+  pitch(seal, 22)
 end
 
 
-function silver(sgn)
-  octavia(sgn, 28)
+function silver(seal)
+  pitch(seal, 28)
 end
 
 
-function aquari(sgn)
-  octavia(sgn, 31)
+function aquari(seal)
+  pitch(seal, 31)
 end
 
 
-function vulcan(sgn)
-  octavia(sgn, 34)
+function vulcan(seal)
+  pitch(seal, 34)
 end
 
 
-function cgdae(sgn)
-  copper(sgn),
-  silver(sgn),
-  jovian(sgn),
-  helios(sgn),
-  hermit(sgn)
+function cgdae(seal)
+  copper(seal),
+  silver(seal),
+  jovian(seal),
+  helios(seal),
+  hermit(seal)
 end
 
 
-function eadgbe(sgn)
-  copper(sgn),
-  vulcan(sgn),
-  helios(sgn),
-  jovian(sgn),
-  silver(sgn),
-  copper(sgn)
+function eadgbe(seal)
+  copper(seal),
+  vulcan(seal),
+  helios(seal),
+  jovian(seal),
+  silver(seal),
+  copper(seal)
 end
 
 
-function ennead(sgn)
-  aquari(sgn),
-  saturn(sgn),
-  hermit(sgn),
-  helios(sgn),
-  jovian(sgn),
-  silver(sgn),
-  copper(sgn),
-  vulcan(sgn),
-  gemini(sgn)
+function dragon(seal)
+  aquari(seal),
+  saturn(seal),
+  hermit(seal),
+  helios(seal),
+  jovian(seal),
+  silver(seal),
+  copper(seal),
+  vulcan(seal),
+  gemini(seal)
 end
 
 
-function horus()
-  strftime("%s", time())
-end
+epoch = strftime("-h%s", time())
 
 
-function layout(sgn, tuned, epoch)
-  println("\n\t", sgn, "-h", epoch)
-  for str in tuned
-    println("\t", str)
-  end
-end
-
-
-function view(sgn="n0")
-  tuner = eadgbe
-  if haskey(krewe, sgn)
+function fabric(seal="z0")
+  if haskey(Harlequin.krewe, seal)
     try
-      layout(sgn, tuner(sgn), horus())
+      println("\n\tguitar-", seal, epoch)
+      for course in eadgbe(seal)
+        println("\t", course)
+      end
     catch anomaly
       println("\ncause $anomaly")
     end
   else
-    println("\n\t", sgn, '?')
+    println("\n\t", seal, '?')
   end 
 end
 
 
 if length(ARGS) > 0
-  for sgn in ARGS
+  for seal in ARGS
     try
-      view(sgn)
+      fabric(seal)
     catch anomaly
       println("\ncause $anomaly")
     end
   end
   println()
 else
-  menu()
+  catalog()
   println()
 end
+
+
+end # module
 
 

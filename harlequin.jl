@@ -1,5 +1,8 @@
 
 
+module Harlequin
+
+
 krewe = [
     "j136l7"	=> "__ __ tw xr __ wt __ uv yq so __ qy ",
     "j167l2"	=> "vu __ __ __ rx wt __ uv yq __ os qy ",
@@ -85,5 +88,8 @@ krewe = [
     "n67m2"	=> "__ ux __ __ ov qq vo __ ty xu __ ww ",
     "n6m2"	=> "qr vp __ __ pv rq wo __ uy yu __ __ ",
 ]
+
+
+end # module
 
 
