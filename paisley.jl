@@ -25,6 +25,16 @@ function place(seal, specie)
 end
 
 place("z0", tacit())
+place("n0yy", "vr __ tt __ rv wq __ us yy su __ qw ")
+
+place("k6yz", "vs __ tu __ rw wr __ ut yz __ oq qo ")
+place("j5zy", "wr __ ut __ sv oq qo __ zy tu __ rw ")
+
+place("j6so", "vu __ tw __ rx wt __ uv yq so __ qy ")
+place("k5os", "xr __ wt __ uv yq __ os qy vu __ tw ")
+
+place("j2xs", "vv zq __ xs ry wu __ uw __ sx __ qz ")
+place("k2sx", "yr sx __ qz vv zq __ xs __ wu __ uw ")
 
 
 function catalog()
