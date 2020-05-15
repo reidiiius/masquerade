@@ -20,6 +20,8 @@ Command-line interface
 
     julia bandana.jl j6 k5
 
+    julia bandana.jl cello j6 k5
+
 ---
 
 ### Distribution

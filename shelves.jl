@@ -1,9 +1,11 @@
 
 
-module Harlequin
+module Shelves
+
+export codex
 
 
-krewe = [
+codex = [
     "j136l7"	=> "__ __ tw xr __ wt __ uv yq so __ qy ",
     "j167l2"	=> "vu __ __ __ rx wt __ uv yq __ os qy ",
     "j17"	=> "__ __ tu __ rw wr __ ut __ sv oq qo ",
