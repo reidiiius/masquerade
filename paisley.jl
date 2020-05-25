@@ -24,7 +24,8 @@ function tacit()
 end
 
 
-function erase!(seal::String)
+function erase!(yarn::String)
+  local seal = symbol(yarn)
   if haskey(codex, seal)
     delete!(codex, seal)
     println("\n\t$seal deleted")
@@ -34,12 +35,13 @@ function erase!(seal::String)
 end
 
 
-function place!(seal::String, specie::String)
-  local span = length(specie)
+function place!(yarn::String, wire::String)
+  local seal = symbol(yarn)
+  local span = length(wire)
   if span >= 36
-    codex[seal] = specie
+    codex[seal] = wire
   else
-    println("\n\t$span? $specie")
+    println("\n\t$span? $wire")
   end
 end
 
@@ -111,10 +113,10 @@ function catalog()
 end
 
 
-function pitch(seal::String, nth::Int)
+function pitch(seal::Symbol, nth::Int)
   try
-    local specie = get(codex, seal, tacit())
-    string(specie[nth:end], specie[1:nth+1])
+    local wire = get(codex, seal, tacit())
+    string(wire[nth:end], wire[1:nth+1])
   catch anomaly
     println("\ncause $anomaly")
   end

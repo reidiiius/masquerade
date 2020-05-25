@@ -17,21 +17,23 @@ function entryway(args...)
   local layout = eadgbe
 
 
-  function sentinel(seal::String)
-    ismatch(r"^([jknz]+\d+)+([lm]\d+)?[o-z]*$", seal)
+  function sentinel(yarn::String)
+    ismatch(r"^([jknz]+\d+)+([lm]\d+)?[o-z]*$", yarn)
   end
 
 
-  function fabric(seal::String="z0")
+  function fabric(yarn::String="z0")
     try
-      if sentinel(seal) && haskey(codex, seal)
-        local diadem = "$attune-$seal-$epoch"
+      local seal = symbol(yarn)
+      if sentinel(yarn) && haskey(codex, seal)
+        local diadem = "$attune-$yarn-$epoch"
+        local specie = layout(seal)
         println("\n\t", diadem)
-        for course in layout(seal)
+        for course in specie
           println("\t", course)
         end
       else
-        println("\n\t", seal, '?')
+        println("\n\t", yarn, '?')
       end 
     catch anomaly
       println("\ncause $anomaly")
@@ -40,8 +42,8 @@ function entryway(args...)
 
 
   function atrium(cargo::Array)
-    for seal in cargo
-      fabric(seal)
+    for yarn in cargo
+      fabric(yarn)
     end
   end
 
@@ -55,7 +57,6 @@ function entryway(args...)
 
     if dexter == 1
       fabric(orchid)
-      println()
 
     elseif dexter > 1
 
