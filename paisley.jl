@@ -38,10 +38,12 @@ end
 function place!(yarn::String, wire::String)
   local seal = symbol(yarn)
   local span = length(wire)
-  if span >= 36
+  if span >= 36 && span <= 60
     codex[seal] = wire
+  elseif span < 36
+    println("\n\tSize: $span? -> $wire")
   else
-    println("\n\t$span? $wire")
+    println("\n\tSize: $span?")
   end
 end
 
@@ -116,7 +118,7 @@ end
 function pitch(seal::Symbol, nth::Int)
   try
     local wire = get(codex, seal, tacit())
-    string(wire[nth:end], wire[1:nth+1])
+    string(wire[nth:end], wire[1:nth + 1])
   catch anomaly
     println("\ncause $anomaly")
   end
@@ -169,11 +171,9 @@ end
 
 
 function bfbfb(seal)
-  vulcan(seal),
-  saturn(seal),
-  vulcan(seal),
-  saturn(seal),
-  vulcan(seal)
+  local fn = saturn(seal)
+  local bn = vulcan(seal)
+  (bn, fn, bn, fn, bn)
 end
 
 
@@ -187,22 +187,22 @@ end
 
 
 function eadgbe(seal)
-  copper(seal),
+  local ingot = copper(seal)
+  ingot,
   vulcan(seal),
   helios(seal),
   jovian(seal),
   silver(seal),
-  copper(seal)
+  ingot
 end
 
 
 function fkbjdn(seal)
-  jovian(seal),
-  aquari(seal),
-  gemini(seal),
-  jovian(seal),
-  aquari(seal),
-  gemini(seal)
+  local dn = jovian(seal)
+  local fk = gemini(seal)
+  local bj = aquari(seal)
+  local rows = (fk, bj, dn, fk, bj, dn)
+  reverse(rows)
 end
 
 

@@ -22,6 +22,26 @@ Command-line interface
 
     julia bandana.jl cello j6 k5
 
+REPL
+
+    guest@multivac2:~$ julia
+
+    julia> include("bandana.jl")
+
+    julia> Bandana.entryway()
+
+    julia> Bandana.entryway("n0")
+
+    julia> Bandana.entryway("cello", "j6", "k5")
+
+    julia> Bandana.place!("j2k6yr", "vv zq __ __ ry wu __ uw yr __ ot qz ")
+
+    julia> Bandana.entryway("bass", "j2k6yr")
+
+    julia> Bandana.erase!("j2k6yr")
+
+    julia> exit() 
+
 ---
 
 ### Distribution
