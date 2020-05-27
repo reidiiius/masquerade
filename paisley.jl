@@ -115,9 +115,25 @@ function catalog()
 end
 
 
+function morpheus(prep::String)
+  local temp = copy(prep)
+  local deca = ('_','o','p','q','r','s','t','u','v','w','x','y','z')
+  local card = ('-','2','3','4','5','6','7','8','9','N','P','Q','R')
+  if length(deca) == length(card)
+    local item = 1
+    while item <= length(deca)
+      temp = replace(temp, deca[item], card[item])
+      item += 1
+    end
+  end
+  return temp
+end
+
+
 function pitch(seal::Symbol, nth::Int)
   try
-    local wire = get(codex, seal, tacit())
+    local prep = get(codex, seal, tacit())
+    local wire = morpheus(prep)
     string(wire[nth:end], wire[1:nth + 1])
   catch anomaly
     println("\ncause $anomaly")
