@@ -117,8 +117,9 @@ end
 
 function morpheus(prep::String)
   local temp = copy(prep)
+  local bar  = char(8213)
   local deca = ('_','o','p','q','r','s','t','u','v','w','x','y','z')
-  local card = ('-','2','3','4','5','6','7','8','9','N','P','Q','R')
+  local card = (bar,'2','3','4','5','6','7','8','9','N','P','Q','R')
   if length(deca) == length(card)
     local item = 1
     while item <= length(deca)
@@ -132,9 +133,9 @@ end
 
 function pitch(seal::Symbol, nth::Int)
   try
-    local prep = get(codex, seal, tacit())
-    local wire = morpheus(prep)
-    string(wire[nth:end], wire[1:nth + 1])
+    local wire = get(codex, seal, tacit())
+    local prep = string(wire[nth:end], wire[1:nth + 1])
+    morpheus(prep)
   catch anomaly
     println("\ncause $anomaly")
   end
