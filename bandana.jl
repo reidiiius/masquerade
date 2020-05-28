@@ -48,7 +48,11 @@ function entryway(args...)
   end
 
 
-  local argots = copy(collect(args))
+  local argots = String[]
+
+  for word in collect(args)
+    push!(argots, lowercase(word))
+  end
 
   local dexter = length(argots)
 
