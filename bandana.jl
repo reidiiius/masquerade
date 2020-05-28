@@ -17,11 +17,6 @@ function entryway(args...)
   local layout = eadgbe
 
 
-  function sentinel(yarn::String)
-    ismatch(r"^([jknz]+\d+)+([lm]\d+)?[o-z]*$", yarn)
-  end
-
-
   function fabric(yarn::String="z0")
     try
       local seal = symbol(yarn)
@@ -48,6 +43,15 @@ function entryway(args...)
   end
 
 
+  function gamut()
+    local art = collect(keys(codex))
+    sort!(art)
+    for its in art
+      fabric(string(its))
+    end
+  end 
+
+
   local argots = String[]
 
   for word in collect(args)
@@ -67,7 +71,9 @@ function entryway(args...)
       if orchid == "aug4th" ||
          orchid == "a4" ||
          orchid == "b5" ||
-         ismatch(r"^(bf)+b?$", orchid)
+         orchid == "dim5th" ||
+         ismatch(r"^(bf)+b?$", orchid) ||
+         ismatch(r"^triton[ae]?[ls]?$", orchid)
         attune, layout = orchid, bfbfb
         shift!(argots)
 
@@ -94,7 +100,9 @@ function entryway(args...)
         shift!(argots)
 
       elseif orchid == "bass" ||
+             orchid == "dragon" ||
              orchid == "p4" ||
+             ismatch(r"^dra[cg]o.*$", orchid) ||
              ismatch(r"^.*eadg.*$", orchid)
         attune, layout = orchid, dragon
         shift!(argots)
@@ -104,7 +112,11 @@ function entryway(args...)
       end
 
       local cargo = copy(argots)
-      atrium(cargo)
+
+      local head = first(cargo)
+
+      head == "every" ||
+      head == "gamut" ? gamut() : atrium(cargo)
     end
 
   else
@@ -112,6 +124,7 @@ function entryway(args...)
   end
 
 end
+
 
 if length(ARGS) > 0
   entryway(ARGS...)

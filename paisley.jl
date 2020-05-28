@@ -11,6 +11,7 @@ export bfbfb,
        erase!,
        fkbjdn,
        place!,
+       sentinel,
        tacit
 
 
@@ -24,8 +25,14 @@ function tacit()
 end
 
 
+function sentinel(yarn::String)
+  local rex = r"^([jknz]+\d+)+([lm]\d+)?[o-z]*$"
+  ismatch(rex, lowercase(yarn))
+end
+
+
 function erase!(yarn::String)
-  local seal = symbol(yarn)
+  local seal = symbol(lowercase(yarn))
   if haskey(codex, seal)
     delete!(codex, seal)
     println("\n\t$seal deleted")
@@ -36,14 +43,19 @@ end
 
 
 function place!(yarn::String, wire::String)
-  local seal = symbol(yarn)
-  local span = length(wire)
-  if span >= 36 && span <= 60
-    codex[seal] = wire
-  elseif span < 36
-    println("\n\tSize: $span? -> $wire")
+  if sentinel(yarn)
+    local seal = symbol(lowercase(yarn))
+    local span = length(wire)
+    if span >= 36 && span <= 60
+      codex[seal] = wire
+      return nothing
+    elseif span < 36
+      println("\n\tSize: $span? -> $wire")
+    else
+      println("\n\tSize: $span?")
+    end
   else
-    println("\n\tSize: $span?")
+    println("\n\t", yarn, '?')
   end
 end
 

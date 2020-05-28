@@ -40,6 +40,8 @@ REPL
 
     julia> Bandana.erase!("j2k6yr")
 
+    julia> Bandana.entryway("bf", "every")
+
     julia> exit() 
 
 ---
