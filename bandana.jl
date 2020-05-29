@@ -100,7 +100,6 @@ function entryway(args...)
         shift!(argots)
 
       elseif orchid == "bass" ||
-             orchid == "dragon" ||
              orchid == "p4" ||
              ismatch(r"^dra[cg]o.*$", orchid) ||
              ismatch(r"^.*eadg.*$", orchid)
@@ -115,8 +114,8 @@ function entryway(args...)
 
       local head = first(cargo)
 
-      head == "every" ||
-      head == "gamut" ? gamut() : atrium(cargo)
+      isequal(head, "every") ||
+      isequal(head, "gamut") ? gamut() : atrium(cargo)
     end
 
   else
