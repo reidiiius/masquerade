@@ -24,7 +24,7 @@ Command-line interface
 
 REPL
 
-    guest@multivac2:~$ julia
+    guest@multivac2:~/masquerade$ julia
 
     julia> include("bandana.jl")
 
