@@ -127,11 +127,30 @@ function catalog()
 end
 
 
+# const nbs = char(160)
+const bbr = char(166)
+
+# const mdt = char(183)
+const hbr = char(8213)
+
+const _Ak = char(50)
+const _Dk = char(51)
+const _Bn = char(52)
+const _En = char(53)
+const _An = char(54)
+const _Dn = char(55)
+const _Gn = char(56)
+const _Cn = char(57)
+const _Fn = char(78)
+const _Ej = char(80)
+const _Aj = char(81)
+const _Dj = char(82)
+
+const orig = (' ','_','o','p','q','r','s','t','u','v','w','x','y','z')
+const veil = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
+
 function transmute!(cord::String)
   local line = copy(cord)
-  local bar  = char(8213)
-  local orig = ('_','o','p','q','r','s','t','u','v','w','x','y','z')
-  local veil = (bar,'2','3','4','5','6','7','8','9','N','P','Q','R')
   if length(orig) == length(veil)
     local item = 1
     while item <= length(orig)

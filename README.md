@@ -22,6 +22,8 @@ Command-line interface
 
     julia bandana.jl cello j6 k5
 
+    julia bandana.jl bass every
+
 REPL
 
     guest@multivac2:~/masquerade$ julia
@@ -40,7 +42,7 @@ REPL
 
     julia> Bandana.erase!("j2k6yr")
 
-    julia> Bandana.entryway("bf", "every")
+    julia> Bandana.entryway("bass", "every")
 
     julia> exit() 
 
