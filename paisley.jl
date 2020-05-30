@@ -20,8 +20,14 @@ include("shelves.jl")
 using .Shelves
 
 
+function bounds(span::Int)
+  span >= 36 && span <= 60
+end
+
+
 function tacit()
-  repeat("__ ", 12)
+  local mute = repeat("__ ", 12)
+  bounds(strwidth(mute)) ? mute : "check tacit"
 end
 
 
@@ -45,8 +51,8 @@ end
 function place!(yarn::String, wire::String)
   if sentinel(yarn)
     local seal = symbol(lowercase(yarn))
-    local span = length(wire)
-    if span >= 36 && span <= 60
+    local span = strwidth(wire)
+    if bounds(span)
       codex[seal] = wire
       return nothing
     elseif span < 36
@@ -113,12 +119,13 @@ function catalog()
     println()
     for its in art
       print("\t", its)
-      if nth % columns == 0
+      if ==(nth % columns, 0)
         println()
       end
       nth += 1
     end
-    if (nth - 1) % columns != 0
+    nth -= 1
+    if !=(nth % columns, 0)
       println()
     end
   catch anomaly
@@ -149,9 +156,11 @@ const _Dj = char(82)
 const orig = (' ','_','o','p','q','r','s','t','u','v','w','x','y','z')
 const veil = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
 
+const trusty = isequal(length(orig), length(veil))
+
 function transmute!(cord::String)
   local line = copy(cord)
-  if length(orig) == length(veil)
+  if trusty
     local item = 1
     while item <= length(orig)
       line = replace(line, orig[item], veil[item])
@@ -165,8 +174,12 @@ end
 function pitch(seal::Symbol, nth::Int)
   try
     local wire = get(codex, seal, tacit())
-    local cord = string(wire[nth:end], wire[1:nth + 1])
-    transmute!(cord)
+    if bounds(strwidth(wire))
+      local cord = string(wire[nth:end], wire[1:nth + 1])
+      transmute!(cord)
+    else
+      tacit()
+    end
   catch anomaly
     println("\ncause $anomaly")
   end
