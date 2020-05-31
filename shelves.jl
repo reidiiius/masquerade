@@ -2,7 +2,7 @@
 
 module Shelves
 
-export codex
+export codex, model, trust, veils
 
 
 global codex = [
@@ -90,6 +90,74 @@ global codex = [
     :n67m2    => "__ ux __ __ ov qq vo __ ty xu __ ww ",
     :n6m2     => "qr vp __ __ pv rq wo __ uy yu __ __ ",
 ]
+
+
+codex[:n0zpyy]  = "vr zp tt __ rv wq __ us yy su __ qw "
+codex[:n0zp]    = "vr zp tt __ rv wq __ us __ su __ qw "
+codex[:n0yy]    = "vr __ tt __ rv wq __ us yy su __ qw "
+codex[:n0pzyy]  = "vr __ tt pz rv wq __ us yy su __ qw "
+codex[:n0pz]    = "vr __ tt pz rv wq __ us __ su __ qw "
+codex[:k6sv]    = "vs __ tu __ rw wr __ ut __ sv oq qo "
+codex[:k2j6zt]  = "vp zt __ pv rq wo __ uy yu __ __ qr "
+codex[:k2j6tz]  = "vp __ tz pv rq wo __ uy yu __ __ qr "
+codex[:k2j17tv] = "__ __ tv pq ro ws __ uu __ sw or qp "
+codex[:k26yu]   = "vp __ __ pv rq wo __ uy yu __ ow qr "
+codex[:k26tv]   = "vt __ tv pq ro ws __ uu __ __ or qx "
+codex[:k26sw]   = "vt __ __ pq ro ws __ uu __ sw or qp "
+codex[:k1j6ot]  = "__ zq to __ ry wu __ uw yr __ ot qz "
+codex[:j6so]    = "vu __ tw __ rp wt __ uv yq so __ qy "
+codex[:j6pr]    = "vu __ tw pr rp wt __ uv yq __ __ qy "
+codex[:j6prso]  = "vu __ tw pr rp wt __ uv yq so __ qy "
+codex[:j6pros]  = "vu __ tw pr rp wt __ uv yq __ os qy "
+codex[:j6os]    = "vu __ tw __ rx wt __ uv yq __ os qy "
+codex[:j3zz]    = "vt zz tv xq __ ws __ uu __ sw __ qx "
+codex[:j3ro]    = "vt __ tv pq ro ws __ uu __ sw __ qx "
+codex[:j3ror]   = "vt __ tv xq ro ws __ uu __ sw or qp "
+codex[:j3or]    = "vt __ tv xq __ ws __ uu __ sw or qp "
+codex[:j3k6yt]  = "vo __ ty xu __ ww __ ux yt __ ov qq "
+codex[:j3k5to]  = "yr __ ot qz __ zq to __ ry wu __ uw "
+codex[:j3k16zs] = "__ zs ty xu __ ww __ ux yt __ ov qq "
+codex[:j36so]   = "vu __ tw xr __ wt __ uv yq so __ qy "
+codex[:j34or]   = "vt __ tv pq ro __ __ uu __ sw or qx "
+codex[:j346ow]  = "vp __ tz pv rq __ __ uy yu __ ow qr "
+codex[:j2to]    = "vv zq to __ ry wu __ uw __ sx __ qz "
+codex[:j2ps]    = "vv zq __ ps ry wu __ uw __ sx __ qz "
+codex[:j26to]   = "vv zq to __ ry wu __ uw yr __ __ qz "
+codex[:j26sp]   = "vv zq __ __ ry wu __ uw yr sp __ qz "
+codex[:j26ps]   = "vv zq __ ps ry wu __ uw yr __ __ qz "
+codex[:j26psp]  = "vv zq __ ps ry wu __ uw yr sp __ qz "
+codex[:j26ot]   = "vv zq __ __ ry wu __ uw yr __ ot qz "
+codex[:j23to]   = "vv zq to xs __ wu __ uw __ sx __ qz "
+codex[:j23ot]   = "vv zq __ xs __ wu __ uw __ sx ot qz "
+codex[:j236sq]  = "vy zu __ xw __ wx __ uz yv sq __ qs "
+codex[:j236sp]  = "vv zq __ xs __ wu __ uw yr sp __ qz "
+codex[:j236ot]  = "vv zq __ xs __ wu __ uw yr __ ot qz "
+codex[:j17zy]   = "__ zy tu __ rw wr __ ut __ sv oq qo "
+
+
+# const nbs = char(160)
+const bbr = char(166)
+
+# const mdt = char(183)
+const hbr = char(8213)
+
+const _Ak = char(50)
+const _Dk = char(51)
+const _Bn = char(52)
+const _En = char(53)
+const _An = char(54)
+const _Dn = char(55)
+const _Gn = char(56)
+const _Cn = char(57)
+const _Fn = char(78)
+const _Ej = char(80)
+const _Aj = char(81)
+const _Dj = char(82)
+
+const model = (' ','_','o','p','q','r','s','t','u','v','w','x','y','z')
+const veils = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
+
+const trust = isequal(length(model), length(veils))
 
 
 end # module

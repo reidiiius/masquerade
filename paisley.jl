@@ -27,7 +27,7 @@ end
 
 function tacit()
   local mute = repeat("__ ", 12)
-  bounds(strwidth(mute)) ? mute : "check tacit"
+  bounds(strwidth(mute)) ? mute : "Check tacit"
 end
 
 
@@ -49,69 +49,25 @@ end
 
 
 function place!(yarn::String, wire::String)
-  if sentinel(yarn)
+  if sentinel(yarn) && is_valid_ascii(wire)
     local seal = symbol(lowercase(yarn))
-    if is_valid_ascii(wire)
-      local span = strwidth(wire)
-      if bounds(span)
-        codex[seal] = wire
-        return nothing
-      elseif isless(span, 36)
-        println("\n\tSize: $span? -> $wire")
-      else
-        println("\n\tSize: $span?")
-      end
+    local span = strwidth(wire)
+    if bounds(span)
+      codex[seal] = wire
+      return nothing
+    elseif isless(span, 36)
+      println("\n\tSize: $span? $wire")
     else
-      println("\n\tASCII? $wire")  
+      println("\n\tSize: $span?")
     end
+  elseif sentinel(yarn)
+    println("\n\tASCII? $wire")
   else
-    println("\n\t", yarn, '?')
+    println("\n\t$yarn?")
   end
 end
 
-place!("z0", tacit())
-
-place!("n0zpyy"  , "vr zp tt __ rv wq __ us yy su __ qw ")
-place!("n0zp"    , "vr zp tt __ rv wq __ us __ su __ qw ")
-place!("n0yy"    , "vr __ tt __ rv wq __ us yy su __ qw ")
-place!("n0pzyy"  , "vr __ tt pz rv wq __ us yy su __ qw ")
-place!("n0pz"    , "vr __ tt pz rv wq __ us __ su __ qw ")
-place!("k6sv"    , "vs __ tu __ rw wr __ ut __ sv oq qo ")
-place!("k2j6zt"  , "vp zt __ pv rq wo __ uy yu __ __ qr ")
-place!("k2j6tz"  , "vp __ tz pv rq wo __ uy yu __ __ qr ")
-place!("k2j17tv" , "__ __ tv pq ro ws __ uu __ sw or qp ")
-place!("k26yu"   , "vp __ __ pv rq wo __ uy yu __ ow qr ")
-place!("k26tv"   , "vt __ tv pq ro ws __ uu __ __ or qx ")
-place!("k26sw"   , "vt __ __ pq ro ws __ uu __ sw or qp ")
-place!("k1j6ot"  , "__ zq to __ ry wu __ uw yr __ ot qz ")
-place!("j6so"    , "vu __ tw __ rp wt __ uv yq so __ qy ")
-place!("j6pr"    , "vu __ tw pr rp wt __ uv yq __ __ qy ")
-place!("j6prso"  , "vu __ tw pr rp wt __ uv yq so __ qy ")
-place!("j6pros"  , "vu __ tw pr rp wt __ uv yq __ os qy ")
-place!("j6os"    , "vu __ tw __ rx wt __ uv yq __ os qy ")
-place!("j3zz"    , "vt zz tv xq __ ws __ uu __ sw __ qx ")
-place!("j3ro"    , "vt __ tv pq ro ws __ uu __ sw __ qx ")
-place!("j3ror"   , "vt __ tv xq ro ws __ uu __ sw or qp ")
-place!("j3or"    , "vt __ tv xq __ ws __ uu __ sw or qp ")
-place!("j3k6yt"  , "vo __ ty xu __ ww __ ux yt __ ov qq ")
-place!("j3k5to"  , "yr __ ot qz __ zq to __ ry wu __ uw ")
-place!("j3k16zs" , "__ zs ty xu __ ww __ ux yt __ ov qq ")
-place!("j36so"   , "vu __ tw xr __ wt __ uv yq so __ qy ")
-place!("j34or"   , "vt __ tv pq ro __ __ uu __ sw or qx ")
-place!("j346ow"  , "vp __ tz pv rq __ __ uy yu __ ow qr ")
-place!("j2to"    , "vv zq to __ ry wu __ uw __ sx __ qz ")
-place!("j2ps"    , "vv zq __ ps ry wu __ uw __ sx __ qz ")
-place!("j26to"   , "vv zq to __ ry wu __ uw yr __ __ qz ")
-place!("j26sp"   , "vv zq __ __ ry wu __ uw yr sp __ qz ")
-place!("j26ps"   , "vv zq __ ps ry wu __ uw yr __ __ qz ")
-place!("j26psp"  , "vv zq __ ps ry wu __ uw yr sp __ qz ")
-place!("j26ot"   , "vv zq __ __ ry wu __ uw yr __ ot qz ")
-place!("j23to"   , "vv zq to xs __ wu __ uw __ sx __ qz ")
-place!("j23ot"   , "vv zq __ xs __ wu __ uw __ sx ot qz ")
-place!("j236sq"  , "vy zu __ xw __ wx __ uz yv sq __ qs ")
-place!("j236sp"  , "vv zq __ xs __ wu __ uw yr sp __ qz ")
-place!("j236ot"  , "vv zq __ xs __ wu __ uw yr __ ot qz ")
-place!("j17zy"   , "__ zy tu __ rw wr __ ut __ sv oq qo ")
+place!("z0", tacit()) # default
 
 
 function catalog()
@@ -133,41 +89,17 @@ function catalog()
       println()
     end
   catch anomaly
-    println("\ncause $anomaly")
+    println("\nCause $anomaly")
   end
 end
 
 
-# const nbs = char(160)
-const bbr = char(166)
-
-# const mdt = char(183)
-const hbr = char(8213)
-
-const _Ak = char(50)
-const _Dk = char(51)
-const _Bn = char(52)
-const _En = char(53)
-const _An = char(54)
-const _Dn = char(55)
-const _Gn = char(56)
-const _Cn = char(57)
-const _Fn = char(78)
-const _Ej = char(80)
-const _Aj = char(81)
-const _Dj = char(82)
-
-const orig = (' ','_','o','p','q','r','s','t','u','v','w','x','y','z')
-const veil = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
-
-const trusty = isequal(length(orig), length(veil))
-
 function transmute!(cord::String)
   local line = copy(cord)
-  if trusty
+  if trust
     local item = 1
-    while item <= length(orig)
-      line = replace(line, orig[item], veil[item])
+    while item <= length(model)
+      line = replace(line, model[item], veils[item])
       item += 1
     end
   end
@@ -185,7 +117,7 @@ function pitch(seal::Symbol, nth::Int)
       tacit()
     end
   catch anomaly
-    println("\ncause $anomaly")
+    println("\nCause $anomaly")
   end
 end
 

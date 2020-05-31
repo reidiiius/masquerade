@@ -31,7 +31,7 @@ function entryway(args...)
         println("\n\t", yarn, '?')
       end 
     catch anomaly
-      println("\ncause $anomaly")
+      println("\nCause $anomaly")
     end
   end
 
