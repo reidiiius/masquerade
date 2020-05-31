@@ -51,14 +51,18 @@ end
 function place!(yarn::String, wire::String)
   if sentinel(yarn)
     local seal = symbol(lowercase(yarn))
-    local span = strwidth(wire)
-    if bounds(span)
-      codex[seal] = wire
-      return nothing
-    elseif span < 36
-      println("\n\tSize: $span? -> $wire")
+    if is_valid_ascii(wire)
+      local span = strwidth(wire)
+      if bounds(span)
+        codex[seal] = wire
+        return nothing
+      elseif isless(span, 36)
+        println("\n\tSize: $span? -> $wire")
+      else
+        println("\n\tSize: $span?")
+      end
     else
-      println("\n\tSize: $span?")
+      println("\n\tASCII? $wire")  
     end
   else
     println("\n\t", yarn, '?')
