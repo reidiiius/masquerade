@@ -21,7 +21,7 @@ using .Shelves
 
 
 function bounds(span::Int)
-  span >= 36 && span <= 60
+  35 < span < 61
 end
 
 
