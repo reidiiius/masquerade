@@ -76,14 +76,12 @@ function catalog()
   local columns = 7
   let nth = 1
     println()
-    for its in art
+    for (nth, its) in enumerate(art)
       print("\t", its)
       if ==(nth % columns, 0)
         println()
       end
-      nth += 1
     end
-    nth -= 1
     if !=(nth % columns, 0)
       println()
     end
