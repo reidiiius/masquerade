@@ -94,11 +94,8 @@ end
 function transmute!(cord::String)
   let line = copy(cord)
     if trust
-      let item = 1
-        while item <= length(model)
-          line = replace(line, model[item], veils[item])
-          item += 1
-        end
+      for (old, new) in duets
+        line = replace(line, old, new)
       end
     end
     return line

@@ -2,7 +2,7 @@
 
 module Shelves
 
-export codex, model, trust, veils
+export codex, duets, trust
 
 
 global codex = [
@@ -158,6 +158,7 @@ const model = (' ','_','o','p','q','r','s','t','u','v','w','x','y','z')
 const veils = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
 
 const trust = isequal(length(model), length(veils))
+const duets = zip(model, veils)
 
 
 end # module
