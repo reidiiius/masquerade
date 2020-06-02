@@ -5,6 +5,32 @@ module Shelves
 export codex, duets, trust
 
 
+# const nbs = char(160)
+const bbr = char(166)
+
+# const mdt = char(183)
+const hbr = char(8213)
+
+const _Ak = char(50)
+const _Dk = char(51)
+const _Bn = char(52)
+const _En = char(53)
+const _An = char(54)
+const _Dn = char(55)
+const _Gn = char(56)
+const _Cn = char(57)
+const _Fn = char(78)
+const _Ej = char(80)
+const _Aj = char(81)
+const _Dj = char(82)
+
+const model = (' ','_','o','p','q','r','s','t','u','v','w','x','y','z')
+const veils = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
+
+const trust = isequal(length(model), length(veils))
+const duets = zip(model, veils)
+
+
 global codex = [
     :j136l7   => "__ __ tw xr __ wt __ uv yq so __ qy ",
     :j167l2   => "vu __ __ __ rx wt __ uv yq __ os qy ",
@@ -133,32 +159,6 @@ codex[:j236sq]  = "vy zu __ xw __ wx __ uz yv sq __ qs "
 codex[:j236sp]  = "vv zq __ xs __ wu __ uw yr sp __ qz "
 codex[:j236ot]  = "vv zq __ xs __ wu __ uw yr __ ot qz "
 codex[:j17zy]   = "__ zy tu __ rw wr __ ut __ sv oq qo "
-
-
-# const nbs = char(160)
-const bbr = char(166)
-
-# const mdt = char(183)
-const hbr = char(8213)
-
-const _Ak = char(50)
-const _Dk = char(51)
-const _Bn = char(52)
-const _En = char(53)
-const _An = char(54)
-const _Dn = char(55)
-const _Gn = char(56)
-const _Cn = char(57)
-const _Fn = char(78)
-const _Ej = char(80)
-const _Aj = char(81)
-const _Dj = char(82)
-
-const model = (' ','_','o','p','q','r','s','t','u','v','w','x','y','z')
-const veils = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
-
-const trust = isequal(length(model), length(veils))
-const duets = zip(model, veils)
 
 
 end # module
