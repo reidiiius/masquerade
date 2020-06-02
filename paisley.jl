@@ -74,19 +74,20 @@ function catalog()
   try
     local art = collect(keys(codex))
     sort!(art)
-    local nth = 1
-    local columns = 7
-    println()
-    for its in art
-      print("\t", its)
-      if ==(nth % columns, 0)
+    let nth = 1
+      local columns = 7
+      println()
+      for its in art
+        print("\t", its)
+        if ==(nth % columns, 0)
+          println()
+        end
+        nth += 1
+      end
+      nth -= 1
+      if !=(nth % columns, 0)
         println()
       end
-      nth += 1
-    end
-    nth -= 1
-    if !=(nth % columns, 0)
-      println()
     end
   catch anomaly
     println("\nCause $anomaly")
@@ -95,15 +96,17 @@ end
 
 
 function transmute!(cord::String)
-  local line = copy(cord)
-  if trust
-    local item = 1
-    while item <= length(model)
-      line = replace(line, model[item], veils[item])
-      item += 1
+  let line = copy(cord)
+    if trust
+      let item = 1
+        while item <= length(model)
+          line = replace(line, model[item], veils[item])
+          item += 1
+        end
+      end
     end
+    return line
   end
-  return line
 end
 
 
