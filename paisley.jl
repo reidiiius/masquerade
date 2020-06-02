@@ -71,26 +71,22 @@ place!("z0", tacit()) # default
 
 
 function catalog()
-  try
-    local art = collect(keys(codex))
-    sort!(art)
-    let nth = 1
-      local columns = 7
-      println()
-      for its in art
-        print("\t", its)
-        if ==(nth % columns, 0)
-          println()
-        end
-        nth += 1
-      end
-      nth -= 1
-      if !=(nth % columns, 0)
+  local art = collect(keys(codex))
+  sort!(art)
+  local columns = 7
+  let nth = 1
+    println()
+    for its in art
+      print("\t", its)
+      if ==(nth % columns, 0)
         println()
       end
+      nth += 1
     end
-  catch anomaly
-    println("\nCause $anomaly")
+    nth -= 1
+    if !=(nth % columns, 0)
+      println()
+    end
   end
 end
 
