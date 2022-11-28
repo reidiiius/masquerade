@@ -27,18 +27,18 @@ end
 
 function tacit()
   local mute = repeat("__ ", 12)
-  bounds(strwidth(mute)) ? mute : "Check tacit"
+  bounds(length(mute)) ? mute : "Check tacit"
 end
 
 
 function sentinel(yarn::String)
   local rex = r"^([jknz]+\d+)+([lm]\d+)?[o-z]*$"
-  ismatch(rex, lowercase(yarn))
+  occursin(rex, lowercase(yarn))
 end
 
 
 function erase!(yarn::String)
-  local seal = symbol(lowercase(yarn))
+  local seal = Symbol(lowercase(yarn))
   if haskey(codex, seal)
     delete!(codex, seal)
     println("\n\t$seal deleted")
@@ -49,9 +49,9 @@ end
 
 
 function place!(yarn::String, wire::String)
-  if sentinel(yarn) && is_valid_ascii(wire)
-    local seal = symbol(lowercase(yarn))
-    local span = strwidth(wire)
+  if sentinel(yarn) && isascii(wire)
+    local seal = Symbol(lowercase(yarn))
+    local span = length(wire)
     if bounds(span)
       codex[seal] = wire
       return nothing
@@ -90,10 +90,11 @@ end
 
 
 function transmute!(cord::String)
-  let line = copy(cord)
+  local span = length(cord)
+  let line = SubString(cord, 1:span)
     if trust
       for (old, new) in duets
-        line = replace(line, old, new)
+        line = replace(line, old => new)
       end
     end
     return line
@@ -104,11 +105,15 @@ end
 function pitch(seal::Symbol, nth::Int)
   try
     local wire = get(codex, seal, tacit())
-    if bounds(strwidth(wire))
+    if bounds(length(wire))
       local cord = string(wire[nth:end], wire[1:nth + 1])
-      transmute!(cord)
+      if latch
+        return transmute!(cord)
+      else
+        return cord
+      end
     else
-      tacit()
+      return tacit()
     end
   catch anomaly
     println("\nCause $anomaly")

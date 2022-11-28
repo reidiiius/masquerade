@@ -10,7 +10,7 @@ using .Paisley
 
 function entryway(args...)
 
-  local epoch = strftime("h%s", time())
+  local epoch = Libc.strftime("h%s", time())
 
   local attune = "guitar"
 
@@ -19,7 +19,7 @@ function entryway(args...)
 
   function fabric(yarn::String="z0")
     try
-      local seal = symbol(yarn)
+      local seal = Symbol(yarn)
       if sentinel(yarn) && haskey(codex, seal)
         local diadem = "$attune-$yarn-$epoch"
         local specie = layout(seal)
@@ -72,39 +72,39 @@ function entryway(args...)
          orchid == "a4" ||
          orchid == "b5" ||
          orchid == "dim5th" ||
-         ismatch(r"^(bf)+b?$", orchid) ||
-         ismatch(r"^triton[ae]?[ls]?$", orchid)
+         occursin(r"^(bf)+b?$", orchid) ||
+         occursin(r"^triton[ae]?[ls]?$", orchid)
         attune, layout = orchid, bfbfb
-        shift!(argots)
+        popfirst!(argots)
 
       elseif orchid == "cello" ||
              orchid == "p5" ||
-             ismatch(r"^.*gda.*$", orchid) ||
-             ismatch(r"^mando.*", orchid) ||
-             ismatch(r"^viol.*", orchid)
+             occursin(r"^.*gda.*$", orchid) ||
+             occursin(r"^mando.*", orchid) ||
+             occursin(r"^viol.*", orchid)
         attune, layout = orchid, cgdae
-        shift!(argots)
+        popfirst!(argots)
 
       elseif orchid == "gtr" ||
-             ismatch(r"^g.*it.*r$", orchid) ||
-             ismatch(r"^.*dgbe.*$", orchid) ||
-             ismatch(r"^.*gcea.*$", orchid) ||
-             ismatch(r"^uk[ue](le)*$", orchid)
+             occursin(r"^g.*it.*r$", orchid) ||
+             occursin(r"^.*dgbe.*$", orchid) ||
+             occursin(r"^.*gcea.*$", orchid) ||
+             occursin(r"^uk[ue](le)*$", orchid)
         attune, layout = orchid, eadgbe
-        shift!(argots)
+        popfirst!(argots)
 
       elseif orchid == "fkbjdn" ||
              orchid == "maj3rd" ||
              orchid == "m3"
         attune, layout = orchid, fkbjdn
-        shift!(argots)
+        popfirst!(argots)
 
       elseif orchid == "bass" ||
              orchid == "p4" ||
-             ismatch(r"^dra[cg]o.*$", orchid) ||
-             ismatch(r"^.*eadg.*$", orchid)
+             occursin(r"^dra[cg]o.*$", orchid) ||
+             occursin(r"^.*eadg.*$", orchid)
         attune, layout = orchid, dragon
-        shift!(argots)
+        popfirst!(argots)
 
       else
         nothing
