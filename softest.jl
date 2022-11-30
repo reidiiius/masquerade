@@ -4,14 +4,41 @@ module Softest
 
   using Test
 
+  const joist = string(repeat('-', 14), '|')
 
   @testset "Bandana" begin
 
     include("bandana.jl")
 
     @testset "Bandana.entryway" begin
-      @test isdefined(Bandana, :entryway)
-      @test isa(Bandana.entryway, Function)
+      local group = (
+        :epoch,
+        :fabric,
+        :atrium,
+        :gamut,
+        :entryway,
+      )
+
+      for item in group
+        @test isdefined(Bandana, item)
+      end
+
+      local batch = (
+        Bandana.fabric,
+        Bandana.atrium,
+        Bandana.gamut,
+        Bandana.entryway,
+      )
+
+      for item in batch
+        @test isa(item, Function)
+      end
+
+      @test isa(Bandana.epoch, String)
+      @test isa(Bandana.fabric(), Nothing)
+      @test isa(Bandana.fabric("n0"), Nothing)
+      @test isa(Bandana.atrium(["n0", "k9"]), Nothing)
+      @test isa(Bandana.gamut(), Nothing)
       @test isa(Bandana.entryway("bass", "every"), Nothing)
       @test isa(Bandana.entryway(), Nothing)
       @test isa(Bandana.entryway("n0"), Nothing)
@@ -38,6 +65,7 @@ module Softest
     println()
   end
 
+  println(joist)
 
   @testset "Paisley" begin
 
@@ -106,25 +134,25 @@ module Softest
         @test isdefined(Paisley, item)
       end
 
-      @test isa(Paisley.hermit, Function)
-      @test isa(Paisley.jovian, Function)
-      @test isa(Paisley.copper, Function)
-      @test isa(Paisley.saturn, Function)
-      @test isa(Paisley.gemini, Function)
-      @test isa(Paisley.helios, Function)
-      @test isa(Paisley.silver, Function)
-      @test isa(Paisley.aquari, Function)
-      @test isa(Paisley.vulcan, Function)
+      local batch = (
+        Paisley.hermit,
+        Paisley.jovian,
+        Paisley.copper,
+        Paisley.saturn,
+        Paisley.gemini,
+        Paisley.helios,
+        Paisley.silver,
+        Paisley.aquari,
+        Paisley.vulcan,
+      )
 
-      @test isa(Paisley.hermit(:n0), String)
-      @test isa(Paisley.jovian(:n0), String)
-      @test isa(Paisley.copper(:n0), String)
-      @test isa(Paisley.saturn(:n0), String)
-      @test isa(Paisley.gemini(:n0), String)
-      @test isa(Paisley.helios(:n0), String)
-      @test isa(Paisley.silver(:n0), String)
-      @test isa(Paisley.aquari(:n0), String)
-      @test isa(Paisley.vulcan(:n0), String)
+      for item in batch
+        @test isa(item, Function)
+      end
+
+      for item in batch
+        @test isa(item(:n0), String)
+      end
     end
 
     @testset "Paisley Tuners" begin
@@ -140,94 +168,86 @@ module Softest
         @test isdefined(Paisley, item)
       end
 
-      @test isa(Paisley.bfbfb, Function)
-      @test isa(Paisley.cgdae, Function)
-      @test isa(Paisley.eadgbe, Function)
-      @test isa(Paisley.fkbjdn, Function)
-      @test isa(Paisley.dragon, Function)
+      local batch = (
+        Paisley.bfbfb,
+        Paisley.cgdae,
+        Paisley.eadgbe,
+        Paisley.fkbjdn,
+        Paisley.dragon,
+      )
 
-      @test isa(Paisley.bfbfb(:n0), NTuple{5, String})
-      @test isa(Paisley.cgdae(:n0), NTuple{5, String})
-      @test isa(Paisley.eadgbe(:n0), NTuple{6, String}) 
-      @test isa(Paisley.fkbjdn(:n0), NTuple{6, String}) 
-      @test isa(Paisley.dragon(:n0), NTuple{9, String}) 
+      for item in batch
+        @test isa(item, Function)
+      end
+
+      local numbs = (5, 5, 6, 6, 9)
+      local niter = 1
+
+      for item in batch
+        @test isa(item(:n0), NTuple{numbs[niter], String})
+        niter = niter + 1
+      end
     end
 
   end
 
+  println(joist)
 
   @testset "Shelves" begin
 
     include("shelves.jl")
 
     @testset "Shelves Data" begin
+      local bank = Dict(
+        :bbr => Shelves.bbr,
+        :hbr => Shelves.hbr,
+        :_Ak => Shelves._Ak,
+        :_Dk => Shelves._Dk,
+        :_Bn => Shelves._Bn,
+        :_En => Shelves._En,
+        :_An => Shelves._An,
+        :_Dn => Shelves._Dn,
+        :_Gn => Shelves._Gn,
+        :_Cn => Shelves._Cn,
+        :_Fn => Shelves._Fn,
+        :_Ej => Shelves._Ej,
+        :_Aj => Shelves._Aj,
+        :_Dj => Shelves._Dj,
+      )
+
+      for (sym, ref) in bank
+        @test isdefined(Shelves, sym)
+        @test isa(ref, Char)
+      end
+
       @test isdefined(Shelves, :latch)
-      @test typeof(Shelves.latch) == Bool
-
-      @test isdefined(Shelves, :bbr)
-      @test typeof(Shelves.bbr) == Char
-
-      @test isdefined(Shelves, :hbr)
-      @test typeof(Shelves.hbr) == Char
-
-      @test isdefined(Shelves, :_Ak)
-      @test typeof(Shelves._Ak) == Char
-
-      @test isdefined(Shelves, :_Dk)
-      @test typeof(Shelves._Dk) == Char
-
-      @test isdefined(Shelves, :_Bn)
-      @test typeof(Shelves._Bn) == Char
-
-      @test isdefined(Shelves, :_En)
-      @test typeof(Shelves._En) == Char
-
-      @test isdefined(Shelves, :_An)
-      @test typeof(Shelves._An) == Char
-
-      @test isdefined(Shelves, :_Dn)
-      @test typeof(Shelves._Dn) == Char
-
-      @test isdefined(Shelves, :_Gn)
-      @test typeof(Shelves._Gn) == Char
-
-      @test isdefined(Shelves, :_Cn)
-      @test typeof(Shelves._Cn) == Char
-
-      @test isdefined(Shelves, :_Fn)
-      @test typeof(Shelves._Fn) == Char
-
-      @test isdefined(Shelves, :_Ej)
-      @test typeof(Shelves._Ej) == Char
-
-      @test isdefined(Shelves, :_Aj)
-      @test typeof(Shelves._Aj) == Char
-
-      @test isdefined(Shelves, :_Dj)
-      @test typeof(Shelves._Dj) == Char
+      @test isa(Shelves.latch, Bool)
 
       @test isdefined(Shelves, :model)
-      @test typeof(Shelves.model) == NTuple{14, Char}
+      @test isa(Shelves.model, NTuple{14, Char})
 
       @test isdefined(Shelves, :veils)
-      @test typeof(Shelves.veils) == NTuple{14, Char}
+      @test isa(Shelves.veils, NTuple{14, Char})
 
       @test isdefined(Shelves, :trust)
-      @test typeof(Shelves.trust) == Bool
+      @test isa(Shelves.trust, Bool)
 
       @test isdefined(Shelves, :duets)
-      @test typeof(Shelves.duets) == Iterators.Zip{
+      @test isa(Shelves.duets, Iterators.Zip{
         Tuple{NTuple{14, Char}, NTuple{14, Char}}
-      }
+      })
 
       @test isdefined(Shelves, :codex)
-      @test typeof(Shelves.codex) == Dict{Symbol, String}
+      @test isa(Shelves.codex, Dict{Symbol, String})
       @test length(Shelves.codex) > 0
       @test haskey(Shelves.codex, :n0)
+      @test isa(get(Shelves.codex, :n0, 0), String)
+      @test isa(get(Shelves.codex, :k9, 0), Number)
     end
 
   end
 
+  println(joist)
 
 end # Softest
 

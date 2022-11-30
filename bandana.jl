@@ -2,56 +2,53 @@
 
 module Bandana
 
+  include("paisley.jl")
 
-include("paisley.jl")
+  using .Paisley
 
-using .Paisley
+  const epoch = Libc.strftime("h%s", time())
+
+begin # hedge
+
+local attune, layout = "guitar", eadgbe
+
+
+function fabric(yarn::String="z0")
+  try
+    local seal = Symbol(yarn)
+    if sentinel(yarn) && haskey(codex, seal)
+      local diadem = "$attune-$yarn-$epoch"
+      local specie = layout(seal)
+      println("\n\t", diadem)
+      for course in specie
+        println("\t", course)
+      end
+    else
+      println("\n\t", yarn, '?')
+    end
+  catch anomaly
+    println("\nCause $anomaly")
+  end
+end
+
+
+function atrium(cargo::Array)
+  for yarn in cargo
+    fabric(yarn)
+  end
+end
+
+
+function gamut()
+  local art = collect(keys(codex))
+  sort!(art)
+  for its in art
+    fabric(string(its))
+  end
+end
 
 
 function entryway(args...)
-
-  local epoch = Libc.strftime("h%s", time())
-
-  local attune = "guitar"
-
-  local layout = eadgbe
-
-
-  function fabric(yarn::String="z0")
-    try
-      local seal = Symbol(yarn)
-      if sentinel(yarn) && haskey(codex, seal)
-        local diadem = "$attune-$yarn-$epoch"
-        local specie = layout(seal)
-        println("\n\t", diadem)
-        for course in specie
-          println("\t", course)
-        end
-      else
-        println("\n\t", yarn, '?')
-      end 
-    catch anomaly
-      println("\nCause $anomaly")
-    end
-  end
-
-
-  function atrium(cargo::Array)
-    for yarn in cargo
-      fabric(yarn)
-    end
-  end
-
-
-  function gamut()
-    local art = collect(keys(codex))
-    sort!(art)
-    for its in art
-      fabric(string(its))
-    end
-  end 
-
-
   local argots = String[]
 
   for word in collect(args)
@@ -133,6 +130,7 @@ end
 
 println()
 
+end # hedge
 
 end # module
 
