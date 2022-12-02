@@ -6,110 +6,118 @@ module Bandana
 
   using .Paisley
 
-  const epoch = Libc.strftime("h%s", time())
+  const epoch = Libc.strftime("h%s", time())::String
 
 begin # hedge
 
-local attune, layout = "guitar", eadgbe
+local attune::String, layout::Function = "guitar", eadgbe
 
 
 function fabric(yarn::String="z0")
   try
-    local seal = Symbol(yarn)
+    local seal::Symbol = Symbol(yarn)
+
     if sentinel(yarn) && haskey(codex, seal)
-      local diadem = "$attune-$yarn-$epoch"
-      local specie = layout(seal)
+      local diadem::String = "$attune-$yarn-$epoch"
+      local specie::NTuple = layout(seal)
+
       println("\n\t", diadem)
-      for course in specie
+      for course::String in specie
         println("\t", course)
       end
     else
-      println("\n\t", yarn, '?')
+      println("\n\t", yarn, " ?")
     end
   catch anomaly
-    println("\nCause $anomaly")
+    write(stderr::IO, "Cause: ", anomaly, "\n")
   end
 end
 
 
 function atrium(cargo::Array)
-  for yarn in cargo
+  for yarn::String in cargo
     fabric(yarn)
   end
 end
 
 
 function gamut()
-  local art = collect(keys(codex))
-  sort!(art)
-  for its in art
+  local arts::Array = collect(keys(codex))
+  local vets::Vector{Symbol} = sort(arts)
+
+  for its::Symbol in vets
     fabric(string(its))
   end
 end
 
 
-function entryway(args...)
-  local argots = String[]
+function catahoula(scent::String)
+  local pref::Function
 
-  for word in collect(args)
-    push!(argots, lowercase(word))
+  if scent == "aug4th" ||
+    scent == "a4" ||
+    scent == "b5" ||
+    scent == "dim5th" ||
+    occursin(r"^(bf)+b?$", scent) ||
+    occursin(r"^triton[ae]?[ls]?$", scent)
+    pref = bfbfb
+
+  elseif scent == "cello" ||
+    scent == "p5" ||
+    occursin(r"^.*gda.*$", scent) ||
+    occursin(r"^mando.*", scent) ||
+    occursin(r"^viol.*", scent)
+    pref = cgdae
+
+  elseif scent == "gtr" ||
+    occursin(r"^g.*it.*r$", scent) ||
+    occursin(r"^.*dgbe.*$", scent) ||
+    occursin(r"^.*gcea.*$", scent) ||
+    occursin(r"^uk[ue](le)*$", scent)
+    pref = eadgbe
+
+  elseif scent == "fkbjdn" ||
+    scent == "maj3rd" ||
+    scent == "m3"
+    pref = fkbjdn
+
+  elseif scent == "bass" ||
+    scent == "p4" ||
+    occursin(r"^dra[cg]o.*$", scent) ||
+    occursin(r"^.*eadg.*$", scent)
+    pref = dragon
+
+  else
+    pref = unison
   end
 
-  local dexter = length(argots)
+  return pref
+end
+
+
+function entryway(args...)
+  local parade::Vector{String} = String[]
+  local circus::Vector = collect(args)
+
+  for word::String in circus
+    push!(parade, lowercase(word))
+  end
+
+  local dexter::Int = length(parade)
 
   if dexter > 0
-    local orchid = argots[1]
+    local orchid::String = parade[1]
 
     if dexter == 1
       fabric(orchid)
 
-    elseif dexter > 1
+    else
+      attune, layout = orchid, catahoula(orchid)
 
-      if orchid == "aug4th" ||
-         orchid == "a4" ||
-         orchid == "b5" ||
-         orchid == "dim5th" ||
-         occursin(r"^(bf)+b?$", orchid) ||
-         occursin(r"^triton[ae]?[ls]?$", orchid)
-        attune, layout = orchid, bfbfb
-        popfirst!(argots)
+      popfirst!(parade)
 
-      elseif orchid == "cello" ||
-             orchid == "p5" ||
-             occursin(r"^.*gda.*$", orchid) ||
-             occursin(r"^mando.*", orchid) ||
-             occursin(r"^viol.*", orchid)
-        attune, layout = orchid, cgdae
-        popfirst!(argots)
-
-      elseif orchid == "gtr" ||
-             occursin(r"^g.*it.*r$", orchid) ||
-             occursin(r"^.*dgbe.*$", orchid) ||
-             occursin(r"^.*gcea.*$", orchid) ||
-             occursin(r"^uk[ue](le)*$", orchid)
-        attune, layout = orchid, eadgbe
-        popfirst!(argots)
-
-      elseif orchid == "fkbjdn" ||
-             orchid == "maj3rd" ||
-             orchid == "m3"
-        attune, layout = orchid, fkbjdn
-        popfirst!(argots)
-
-      elseif orchid == "bass" ||
-             orchid == "p4" ||
-             occursin(r"^dra[cg]o.*$", orchid) ||
-             occursin(r"^.*eadg.*$", orchid)
-        attune, layout = orchid, dragon
-        popfirst!(argots)
-
-      else
-        nothing
-      end
-
-      local cargo = copy(argots)
-
-      local head = first(cargo)
+      local cargo::Array = copy(parade)
+      local head::String = first(cargo)
 
       isequal(head, "every") ||
       isequal(head, "gamut") ? gamut() : atrium(cargo)
@@ -118,7 +126,6 @@ function entryway(args...)
   else
     catalog()
   end
-
 end
 
 
@@ -132,6 +139,5 @@ println()
 
 end # hedge
 
-end # module
-
+end # Bandana
 

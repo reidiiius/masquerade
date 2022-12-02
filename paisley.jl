@@ -12,7 +12,8 @@ export bfbfb,
        fkbjdn,
        place!,
        sentinel,
-       tacit
+       tacit,
+       unison
 
 
 include("shelves.jl")
@@ -39,12 +40,12 @@ end
 
 function erase!(yarn::String)
   local seal = Symbol(lowercase(yarn))
+
   if haskey(codex, seal)
     delete!(codex, seal)
-    println("\n\t$seal deleted")
-  else
-    println("\n\t$seal not found")
   end
+
+  return nothing
 end
 
 
@@ -52,19 +53,22 @@ function place!(yarn::String, wire::String)
   if sentinel(yarn) && isascii(wire)
     local seal = Symbol(lowercase(yarn))
     local span = length(wire)
+
     if bounds(span)
       codex[seal] = wire
-      return nothing
     elseif isless(span, 36)
       println("\n\tSize: $span? $wire")
     else
       println("\n\tSize: $span?")
     end
+
   elseif sentinel(yarn)
     println("\n\tASCII? $wire")
   else
-    println("\n\t$yarn?")
+    println("\n\t$yarn ?")
   end
+
+  return nothing
 end
 
 place!("z0", tacit()) # default
@@ -166,6 +170,12 @@ function vulcan(seal)
 end
 
 
+function unison(seal)
+  local cn = hermit(seal)
+  (cn, cn)
+end
+
+
 function bfbfb(seal)
   local fn = saturn(seal)
   local bn = vulcan(seal)
@@ -215,6 +225,5 @@ function dragon(seal)
 end
 
 
-end # module
-
+end # Paisley
 

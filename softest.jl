@@ -16,6 +16,7 @@ module Softest
         :fabric,
         :atrium,
         :gamut,
+        :catahoula,
         :entryway,
       )
 
@@ -27,6 +28,7 @@ module Softest
         Bandana.fabric,
         Bandana.atrium,
         Bandana.gamut,
+        Bandana.catahoula,
         Bandana.entryway,
       )
 
@@ -39,6 +41,8 @@ module Softest
       @test isa(Bandana.fabric("n0"), Nothing)
       @test isa(Bandana.atrium(["n0", "k9"]), Nothing)
       @test isa(Bandana.gamut(), Nothing)
+      @test isa(Bandana.catahoula("bead"), Function)
+      @test isa(Bandana.catahoula("misfit"), Function)
       @test isa(Bandana.entryway("bass", "every"), Nothing)
       @test isa(Bandana.entryway(), Nothing)
       @test isa(Bandana.entryway("n0"), Nothing)
@@ -48,21 +52,27 @@ module Softest
     end
 
     @testset "Bandana Imports" begin
-      local sign = "j2k6yr"
-      local cord = "vv zq __ __ ry wu __ uw yr __ ot qz "
+      local group = (
+        :bfbfb,
+        :catalog,
+        :cgdae,
+        :codex,
+        :dragon,
+        :eadgbe,
+        :erase!,
+        :fkbjdn,
+        :place!,
+        :sentinel,
+        :tacit,
+        :unison
+      )
 
-      # Bandana imports Paisley.place!
-      @test isdefined(Bandana, :place!)
-      @test isa(Bandana.place!(sign, cord), Nothing)
-      @test isa(Bandana.entryway(sign), Nothing)
-
-      # Bandana imports Paisley.erase!
-      @test isdefined(Bandana, :erase!)
-      @test isa(Bandana.erase!(sign), Nothing)
-      @test isa(Bandana.entryway(sign), Nothing)
+      for item in group
+        @test isdefined(Bandana, item)
+      end
     end
 
-    println()
+    println("\n")
   end
 
   println(joist)
@@ -70,6 +80,9 @@ module Softest
   @testset "Paisley" begin
 
     include("paisley.jl")
+
+    local sign = "k2j5ry"
+    local cord = "yr __ __ qz vv zq to __ ry wu __ uw "
 
     @testset "Paisley.bounds" begin
       @test isdefined(Paisley, :bounds)
@@ -93,11 +106,13 @@ module Softest
     @testset "Paisley.place!" begin
       @test isdefined(Paisley, :place!)
       @test isa(Paisley.place!, Function)
+      @test isa(Paisley.place!(sign, cord), Nothing)
     end
 
     @testset "Paisley.erase!" begin
       @test isdefined(Paisley, :erase!)
       @test isa(Paisley.erase!, Function)
+      @test isa(Paisley.erase!(sign), Nothing)
     end
 
     @testset "Paisley.catalog" begin
@@ -157,6 +172,7 @@ module Softest
 
     @testset "Paisley Tuners" begin
       local group = (
+        :unison,
         :bfbfb,
         :cgdae,
         :eadgbe,
@@ -169,6 +185,7 @@ module Softest
       end
 
       local batch = (
+        Paisley.unison,
         Paisley.bfbfb,
         Paisley.cgdae,
         Paisley.eadgbe,
@@ -180,7 +197,7 @@ module Softest
         @test isa(item, Function)
       end
 
-      local numbs = (5, 5, 6, 6, 9)
+      local numbs = (2, 5, 5, 6, 6, 9)
       local niter = 1
 
       for item in batch
@@ -250,5 +267,4 @@ module Softest
   println(joist)
 
 end # Softest
-
 

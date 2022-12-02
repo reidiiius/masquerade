@@ -160,6 +160,5 @@ global codex = Dict([
 ])
 
 
-end # module
-
+end # Shelves
 
