@@ -6,14 +6,8 @@ module Bandana
 
   using .Paisley
 
-  const epoch = Libc.strftime("h%s", time())::String
 
-begin # hedge
-
-local attune::String, layout::Function = "guitar", eadgbe
-
-
-function fabric(yarn::String="z0")
+function fabric(attune::String, layout::Function, yarn::String="z0")
   try
     local seal::Symbol = Symbol(yarn)
 
@@ -34,19 +28,19 @@ function fabric(yarn::String="z0")
 end
 
 
-function atrium(cargo::Array)
+function atrium(attune::String, layout::Function, cargo::Array)
   for yarn::String in cargo
-    fabric(yarn)
+    fabric(attune, layout, yarn)
   end
 end
 
 
-function gamut()
+function gamut(attune::String, layout::Function)
   local arts::Array = collect(keys(codex))
   local vets::Vector{Symbol} = sort(arts)
 
   for its::Symbol in vets
-    fabric(string(its))
+    fabric(attune, layout, string(its))
   end
 end
 
@@ -54,12 +48,10 @@ end
 function catahoula(scent::String)
   local pref::Function
 
-  if scent == "aug4th" ||
-    scent == "a4" ||
+  if scent == "a4" ||
     scent == "b5" ||
-    scent == "dim5th" ||
     occursin(r"^(bf)+b?$", scent) ||
-    occursin(r"^triton[ae]?[ls]?$", scent)
+    occursin(r"^tritone?$", scent)
     pref = bfbfb
 
   elseif scent == "cello" ||
@@ -77,7 +69,6 @@ function catahoula(scent::String)
     pref = eadgbe
 
   elseif scent == "fkbjdn" ||
-    scent == "maj3rd" ||
     scent == "m3"
     pref = fkbjdn
 
@@ -99,6 +90,9 @@ function entryway(args...)
   local parade::Vector{String} = String[]
   local circus::Vector = collect(args)
 
+  local attune::String = "guitar"
+  local layout::Function = eadgbe
+
   for word::String in circus
     push!(parade, lowercase(word))
   end
@@ -109,18 +103,23 @@ function entryway(args...)
     local orchid::String = parade[1]
 
     if dexter == 1
-      fabric(orchid)
-
-    else
-      attune, layout = orchid, catahoula(orchid)
+      fabric(attune, layout, orchid)
+    elseif !sentinel(orchid)
+      attune = orchid
+      layout = catahoula(orchid)
 
       popfirst!(parade)
 
       local cargo::Array = copy(parade)
       local head::String = first(cargo)
 
-      isequal(head, "every") ||
-      isequal(head, "gamut") ? gamut() : atrium(cargo)
+      if head == "every" || head == "gamut"
+        gamut(attune, layout)
+      else
+        atrium(attune, layout, cargo)
+      end
+    else
+      atrium(attune, layout, parade)
     end
 
   else
@@ -136,8 +135,6 @@ else
 end
 
 println()
-
-end # hedge
 
 end # Bandana
 

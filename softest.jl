@@ -10,9 +10,33 @@ module Softest
 
     include("bandana.jl")
 
+    @testset "Bandana Imports" begin
+      local group = (
+        :bfbfb,
+        :catalog,
+        :cgdae,
+        :codex,
+        :dragon,
+        :eadgbe,
+        :epoch,
+        :erase!,
+        :fkbjdn,
+        :place!,
+        :sentinel,
+        :tacit,
+        :unison
+      )
+
+      for item in group
+        @test isdefined(Bandana, item)
+      end
+    end
+
+    local attune::String = "m3"
+    local layout::Function = Bandana.fkbjdn
+
     @testset "Bandana.entryway" begin
       local group = (
-        :epoch,
         :fabric,
         :atrium,
         :gamut,
@@ -36,40 +60,18 @@ module Softest
         @test isa(item, Function)
       end
 
-      @test isa(Bandana.epoch, String)
-      @test isa(Bandana.fabric(), Nothing)
-      @test isa(Bandana.fabric("n0"), Nothing)
-      @test isa(Bandana.atrium(["n0", "k9"]), Nothing)
-      @test isa(Bandana.gamut(), Nothing)
+      @test isa(Bandana.fabric(attune, layout), Nothing)
+      @test isa(Bandana.fabric(attune, layout, "n0"), Nothing)
+      @test isa(Bandana.atrium(attune, layout, ["n0", "k9"]), Nothing)
+      @test isa(Bandana.gamut(attune, layout), Nothing)
       @test isa(Bandana.catahoula("bead"), Function)
       @test isa(Bandana.catahoula("misfit"), Function)
-      @test isa(Bandana.entryway("bass", "every"), Nothing)
+      @test isa(Bandana.entryway("p4", "every"), Nothing)
       @test isa(Bandana.entryway(), Nothing)
       @test isa(Bandana.entryway("n0"), Nothing)
       @test isa(Bandana.entryway("k9"), Nothing)
       @test isa(Bandana.entryway("kazoo", "j3"), Nothing)
-      @test isa(Bandana.entryway("cello", "j6", "k5"), Nothing)
-    end
-
-    @testset "Bandana Imports" begin
-      local group = (
-        :bfbfb,
-        :catalog,
-        :cgdae,
-        :codex,
-        :dragon,
-        :eadgbe,
-        :erase!,
-        :fkbjdn,
-        :place!,
-        :sentinel,
-        :tacit,
-        :unison
-      )
-
-      for item in group
-        @test isdefined(Bandana, item)
-      end
+      @test isa(Bandana.entryway("p5", "j6", "k5"), Nothing)
     end
 
     println("\n")
@@ -236,6 +238,9 @@ module Softest
         @test isdefined(Shelves, sym)
         @test isa(ref, Char)
       end
+
+      @test isdefined(Shelves, :epoch)
+      @test isa(Shelves.epoch, String)
 
       @test isdefined(Shelves, :latch)
       @test isa(Shelves.latch, Bool)

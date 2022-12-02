@@ -2,23 +2,23 @@
 
 module Paisley
 
+include("shelves.jl")
+
+using .Shelves
+
 export bfbfb,
        catalog,
        cgdae,
        codex,
        dragon,
        eadgbe,
+       epoch,
        erase!,
        fkbjdn,
        place!,
        sentinel,
        tacit,
        unison
-
-
-include("shelves.jl")
-
-using .Shelves
 
 
 function bounds(span::Int)
@@ -71,7 +71,11 @@ function place!(yarn::String, wire::String)
   return nothing
 end
 
-place!("z0", tacit()) # default
+try
+  place!("z0", tacit())
+catch anomaly
+  write(stderr::IO, "Cause: ", anomaly, "\n")
+end
 
 
 function catalog()
