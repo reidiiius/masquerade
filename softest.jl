@@ -1,5 +1,4 @@
 
-
 module Softest
 
   using Test
@@ -15,16 +14,12 @@ module Softest
         :bfbfb,
         :catalog,
         :cgdae,
-        :codex,
         :dragon,
         :eadgbe,
-        :epoch,
-        :erase!,
         :fkbjdn,
-        :place!,
         :sentinel,
         :tacit,
-        :unison
+        :unison,
       )
 
       for item in group
@@ -83,9 +78,6 @@ module Softest
 
     include("paisley.jl")
 
-    local sign = "k2j5ry"
-    local cord = "yr __ __ qz vv zq to __ ry wu __ uw "
-
     @testset "Paisley.bounds" begin
       @test isdefined(Paisley, :bounds)
       @test isa(Paisley.bounds, Function)
@@ -103,18 +95,6 @@ module Softest
       @test isdefined(Paisley, :sentinel)
       @test isa(Paisley.sentinel, Function)
       @test isa(Paisley.sentinel("j3k56m4ww"), Bool)
-    end
-
-    @testset "Paisley.place!" begin
-      @test isdefined(Paisley, :place!)
-      @test isa(Paisley.place!, Function)
-      @test isa(Paisley.place!(sign, cord), Nothing)
-    end
-
-    @testset "Paisley.erase!" begin
-      @test isdefined(Paisley, :erase!)
-      @test isa(Paisley.erase!, Function)
-      @test isa(Paisley.erase!(sign), Nothing)
     end
 
     @testset "Paisley.catalog" begin

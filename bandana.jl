@@ -1,18 +1,20 @@
-
+#! /usr/bin/julia
 
 module Bandana
 
-  include("paisley.jl")
+include("shelves.jl")
+include("paisley.jl")
 
-  using .Paisley
+using .Paisley
 
 
-function fabric(attune::String, layout::Function, yarn::String="z0")
+function fabric(attune::String, layout::Function, yarn::String="i0")
   try
     local seal::Symbol = Symbol(yarn)
 
-    if sentinel(yarn) && haskey(codex, seal)
-      local diadem::String = "$attune-$yarn-$epoch"
+    if sentinel(yarn) && haskey(Shelves.codex, seal)
+      local cronus::String = Shelves.epoch
+      local diadem::String = "$attune-$yarn-$cronus"
       local specie::NTuple = layout(seal)
 
       println("\n\t", diadem)
@@ -36,7 +38,7 @@ end
 
 
 function gamut(attune::String, layout::Function)
-  local arts::Array = collect(keys(codex))
+  local arts::Array = collect(keys(Shelves.codex))
   local vets::Vector{Symbol} = sort(arts)
 
   for its::Symbol in vets

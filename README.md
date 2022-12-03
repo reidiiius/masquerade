@@ -56,18 +56,6 @@ REPL
 
 :
 
-    Bandana.place!("j2k6yr", "vv zq __ __ ry wu __ uw yr __ ot qz ")
-
-:
-
-    Bandana.entryway("bass", "j2k6yr")
-
-:
-
-    Bandana.erase!("j2k6yr")
-
-:
-
     Bandana.entryway("bass", "every")
 
 :

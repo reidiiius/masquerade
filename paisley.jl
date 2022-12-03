@@ -1,21 +1,14 @@
 
-
 module Paisley
 
 include("shelves.jl")
 
-using .Shelves
-
 export bfbfb,
        catalog,
        cgdae,
-       codex,
        dragon,
        eadgbe,
-       epoch,
-       erase!,
        fkbjdn,
-       place!,
        sentinel,
        tacit,
        unison
@@ -33,53 +26,13 @@ end
 
 
 function sentinel(yarn::String)
-  local rex = r"^([jknz]+\d+)+([lm]\d+)?[o-z]*$"
+  local rex = r"^([ijkn]+\d+)+([lm]\d+)?[o-z]*$"
   occursin(rex, lowercase(yarn))
 end
 
 
-function erase!(yarn::String)
-  local seal = Symbol(lowercase(yarn))
-
-  if haskey(codex, seal)
-    delete!(codex, seal)
-  end
-
-  return nothing
-end
-
-
-function place!(yarn::String, wire::String)
-  if sentinel(yarn) && isascii(wire)
-    local seal = Symbol(lowercase(yarn))
-    local span = length(wire)
-
-    if bounds(span)
-      codex[seal] = wire
-    elseif isless(span, 36)
-      println("\n\tSize: $span? $wire")
-    else
-      println("\n\tSize: $span?")
-    end
-
-  elseif sentinel(yarn)
-    println("\n\tASCII? $wire")
-  else
-    println("\n\t$yarn ?")
-  end
-
-  return nothing
-end
-
-try
-  place!("z0", tacit())
-catch anomaly
-  write(stderr::IO, "Cause: ", anomaly, "\n")
-end
-
-
 function catalog()
-  local art = collect(keys(codex))
+  local art = collect(keys(Shelves.codex))
   sort!(art)
   local columns = 7
   let nth = 1
@@ -100,8 +53,8 @@ end
 function transmute!(cord::String)
   local span = length(cord)
   let line = SubString(cord, 1:span)
-    if trust
-      for (old, new) in duets
+    if Shelves.trust
+      for (old, new) in Shelves.duets
         line = replace(line, old => new)
       end
     end
@@ -112,10 +65,10 @@ end
 
 function pitch(seal::Symbol, nth::Int)
   try
-    local wire = get(codex, seal, tacit())
+    local wire = get(Shelves.codex, seal, tacit())
     if bounds(length(wire))
       local cord = string(wire[nth:end], wire[1:nth + 1])
-      if latch
+      if Shelves.latch
         return transmute!(cord)
       else
         return cord

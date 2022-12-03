@@ -1,5 +1,4 @@
 
-
 module Shelves
 
 export codex, duets, epoch, latch, trust
@@ -33,8 +32,8 @@ const veils = (bbr,hbr,_Ak,_Dk,_Bn,_En,_An,_Dn,_Gn,_Cn,_Fn,_Ej,_Aj,_Dj)
 const trust = isequal(length(model), length(veils))
 const duets = zip(model, veils)
 
-
-global codex = Dict([
+const codex = Dict(
+    :i0       => "__ __ __ __ __ __ __ __ __ __ __ __ ",
     :j136l7   => "__ __ tw xr __ wt __ uv yq so __ qy ",
     :j167l2   => "vu __ __ __ rx wt __ uv yq __ os qy ",
     :j17l2    => "vs __ __ __ rw wr __ ut __ sv oq qo ",
@@ -159,8 +158,7 @@ global codex = Dict([
     :n5l2     => "vp __ __ pv rq __ __ uy yu __ ow qr ",
     :n67m2    => "__ ux __ __ ov qq vo __ ty xu __ ww ",
     :n6m2     => "qr vp __ __ pv rq wo __ uy yu __ __ ",
-])
-
+)
 
 end # Shelves
 
