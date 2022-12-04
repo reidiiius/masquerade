@@ -27,15 +27,14 @@ module Softest
       end
     end
 
-    local attune::String = "m3"
-    local layout::Function = Bandana.fkbjdn
-
-    @testset "Bandana.entryway" begin
+    @testset "Bandana Objects" begin
       local group = (
+        :Phylum,
         :fabric,
         :atrium,
         :gamut,
         :catahoula,
+        :normalize,
         :entryway,
       )
 
@@ -48,23 +47,62 @@ module Softest
         Bandana.atrium,
         Bandana.gamut,
         Bandana.catahoula,
+        Bandana.normalize,
         Bandana.entryway,
       )
 
       for item in batch
         @test isa(item, Function)
       end
+    end
 
-      @test isa(Bandana.fabric(attune, layout), Nothing)
-      @test isa(Bandana.fabric(attune, layout, "n0"), Nothing)
-      @test isa(Bandana.atrium(attune, layout, ["n0", "k9"]), Nothing)
-      @test isa(Bandana.gamut(attune, layout), Nothing)
+    local attune::String = "m3"
+    local layout::Function = Bandana.fkbjdn
+    local record = Bandana.Phylum(attune, layout)
+
+    @testset "Bandana.Phylum" begin
+      @test isa(record, Bandana.Phylum)
+      @test isa(record.attune, String)
+      @test isa(record.layout, Function)
+    end
+
+    @testset "Bandana.fabric" begin
+      @test isa(Bandana.fabric(record), Nothing)
+      @test isa(Bandana.fabric(record, "n0"), Nothing)
+    end
+
+    @testset "Bandana.atrium" begin
+      @test isa(Bandana.atrium(record, []), Nothing)
+      @test isa(Bandana.atrium(record, ["n0", "k9"]), Nothing)
+    end
+
+    @testset "Bandana.gamut" begin
+      @test isa(Bandana.gamut(record), Nothing)
+    end
+
+    @testset "Bandana.catahoula" begin
       @test isa(Bandana.catahoula("bead"), Function)
       @test isa(Bandana.catahoula("misfit"), Function)
+    end
+
+    @testset "Bandana.normalize" begin
+      local chex = Bandana.normalize(["0123456789ABCDEF"])
+      local bars = Bandana.normalize(["■", "□", "j2k56m4"])
+      local arks = Bandana.normalize(["k6", "j5", "¢£¤¥€"])
+
+      @test isa(chex, Array)
+      @test isa(bars, Array)
+      @test isa(arks, Array)
+      @test length(chex) == 0
+      @test length(bars) == 1
+      @test length(arks) == 2
+    end
+
+    @testset "Bandana.entryway" begin
       @test isa(Bandana.entryway("p4", "every"), Nothing)
       @test isa(Bandana.entryway(), Nothing)
       @test isa(Bandana.entryway("n0"), Nothing)
-      @test isa(Bandana.entryway("k9"), Nothing)
+      @test isa(Bandana.entryway("k9", "k2j17"), Nothing)
       @test isa(Bandana.entryway("kazoo", "j3"), Nothing)
       @test isa(Bandana.entryway("p5", "j6", "k5"), Nothing)
     end
@@ -94,7 +132,8 @@ module Softest
     @testset "Paisley.sentinel" begin
       @test isdefined(Paisley, :sentinel)
       @test isa(Paisley.sentinel, Function)
-      @test isa(Paisley.sentinel("j3k56m4ww"), Bool)
+      @test isa(Paisley.sentinel("k2j17tv"), Bool)
+      @test isa(Paisley.sentinel("misfit"), Bool)
     end
 
     @testset "Paisley.catalog" begin

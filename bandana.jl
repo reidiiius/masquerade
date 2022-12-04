@@ -7,42 +7,48 @@ include("paisley.jl")
 
 using .Paisley
 
+struct Phylum
+  attune::String
+  layout::Function
+end
 
-function fabric(attune::String, layout::Function, yarn::String="i0")
+
+function fabric(record::Phylum, sign::String="i0")
   try
-    local seal::Symbol = Symbol(yarn)
+    local seal::Symbol = Symbol(sign)
 
-    if sentinel(yarn) && haskey(Shelves.codex, seal)
+    if sentinel(sign) && haskey(Shelves.codex, seal)
+      local zither::String = record.attune
       local cronus::String = Shelves.epoch
-      local diadem::String = "$attune-$yarn-$cronus"
-      local specie::NTuple = layout(seal)
+      local diadem::String = "$zither-$sign-$cronus"
+      local specie::NTuple = record.layout(seal)
 
       println("\n\t", diadem)
       for course::String in specie
         println("\t", course)
       end
     else
-      println("\n\t", yarn, " ?")
+      println("\n\t", sign, " ?")
     end
   catch anomaly
-    write(stderr::IO, "Cause: ", anomaly, "\n")
+    println("Cause: ", anomaly)
   end
 end
 
 
-function atrium(attune::String, layout::Function, cargo::Array)
-  for yarn::String in cargo
-    fabric(attune, layout, yarn)
+function atrium(record::Phylum, parade::Array)
+  for sign::String in parade
+    fabric(record, sign)
   end
 end
 
 
-function gamut(attune::String, layout::Function)
+function gamut(record::Phylum)
   local arts::Array = collect(keys(Shelves.codex))
   local vets::Vector{Symbol} = sort(arts)
 
   for its::Symbol in vets
-    fabric(attune, layout, string(its))
+    fabric(record, string(its))
   end
 end
 
@@ -88,40 +94,49 @@ function catahoula(scent::String)
 end
 
 
-function entryway(args...)
+function normalize(circus::Vector)
   local parade::Vector{String} = String[]
-  local circus::Vector = collect(args)
 
+  for word::String in circus
+    if isascii(word) && length(word) < 15
+      push!(parade, lowercase(word))
+    end
+  end
+
+  return parade
+end
+
+
+function entryway(args...)
+  local circus::Vector{String} = collect(args)
+  local parade::Vector{String} = normalize(circus)
+  local dexter::UInt8 = length(parade)
+
+  # defaults
   local attune::String = "guitar"
   local layout::Function = eadgbe
 
-  for word::String in circus
-    push!(parade, lowercase(word))
-  end
-
-  local dexter::Int = length(parade)
-
   if dexter > 0
     local orchid::String = parade[1]
+    local record::Phylum
 
     if dexter == 1
-      fabric(attune, layout, orchid)
+      record = Phylum(attune, layout)
+      fabric(record, orchid)
     elseif !sentinel(orchid)
-      attune = orchid
-      layout = catahoula(orchid)
+      record = Phylum(orchid, catahoula(orchid))
 
       popfirst!(parade)
-
-      local cargo::Array = copy(parade)
-      local head::String = first(cargo)
+      local head::String = first(parade)
 
       if head == "every" || head == "gamut"
-        gamut(attune, layout)
+        gamut(record)
       else
-        atrium(attune, layout, cargo)
+        atrium(record, parade)
       end
     else
-      atrium(attune, layout, parade)
+      record = Phylum(attune, layout)
+      atrium(record, parade)
     end
 
   else
