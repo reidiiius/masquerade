@@ -10,6 +10,7 @@ using .Paisley
 struct Phylum
   attune::String
   layout::Function
+  parade::Vector{String}
 end
 
 
@@ -31,24 +32,33 @@ function fabric(record::Phylum, sign::String="i0")
       println("\n\t", sign, " ?")
     end
   catch anomaly
-    println("Cause: ", anomaly)
+    @warn anomaly
   end
 end
 
 
-function atrium(record::Phylum, parade::Array)
-  for sign::String in parade
+function atrium(record::Phylum)
+  for sign::String in record.parade
     fabric(record, sign)
   end
 end
 
 
 function gamut(record::Phylum)
-  local arts::Array = collect(keys(Shelves.codex))
-  local vets::Vector{Symbol} = sort(arts)
+  try
+    local hashed::Vector{Symbol} = collect(keys(Shelves.codex))
+    local sorted::Vector{Symbol} = sort(hashed)
+    local zither::String = record.attune
+    local cronus::String = Shelves.epoch
 
-  for its::Symbol in vets
-    fabric(record, string(its))
+    for sign in sorted
+      println("\n\t$zither-$sign-$cronus")
+      for course::String in record.layout(sign)
+        println("\t", course)
+      end
+    end
+  catch anomaly
+    @warn anomaly
   end
 end
 
@@ -121,22 +131,22 @@ function entryway(args...)
     local record::Phylum
 
     if dexter == 1
-      record = Phylum(attune, layout)
+      record = Phylum(attune, layout, parade)
       fabric(record, orchid)
     elseif !sentinel(orchid)
-      record = Phylum(orchid, catahoula(orchid))
-
       popfirst!(parade)
+
+      record = Phylum(orchid, catahoula(orchid), parade)
       local head::String = first(parade)
 
       if head == "every" || head == "gamut"
         gamut(record)
       else
-        atrium(record, parade)
+        atrium(record)
       end
     else
-      record = Phylum(attune, layout)
-      atrium(record, parade)
+      record = Phylum(attune, layout, parade)
+      atrium(record)
     end
 
   else

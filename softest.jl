@@ -56,14 +56,16 @@ module Softest
       end
     end
 
-    local attune::String = "m3"
-    local layout::Function = Bandana.fkbjdn
-    local record = Bandana.Phylum(attune, layout)
+    local attune::String = "beadgcf"
+    local layout::Function = Bandana.dragon
+    local parade::Vector{String} = ["n0", "k9", "j3"]
+    local record = Bandana.Phylum(attune, layout, parade)
 
     @testset "Bandana.Phylum" begin
       @test isa(record, Bandana.Phylum)
       @test isa(record.attune, String)
       @test isa(record.layout, Function)
+      @test isa(record.parade, Vector{String})
     end
 
     @testset "Bandana.fabric" begin
@@ -72,8 +74,8 @@ module Softest
     end
 
     @testset "Bandana.atrium" begin
-      @test isa(Bandana.atrium(record, []), Nothing)
-      @test isa(Bandana.atrium(record, ["n0", "k9"]), Nothing)
+      @test isa(Bandana.atrium(record), Nothing)
+      @test isa(Bandana.atrium(record), Nothing)
     end
 
     @testset "Bandana.gamut" begin
@@ -99,8 +101,9 @@ module Softest
     end
 
     @testset "Bandana.entryway" begin
-      @test isa(Bandana.entryway("p4", "every"), Nothing)
+      @test isa(Bandana.entryway("m3", "every"), Nothing)
       @test isa(Bandana.entryway(), Nothing)
+      @test isa(Bandana.entryway("a4"), Nothing)
       @test isa(Bandana.entryway("n0"), Nothing)
       @test isa(Bandana.entryway("k9", "k2j17"), Nothing)
       @test isa(Bandana.entryway("kazoo", "j3"), Nothing)
@@ -283,7 +286,7 @@ module Softest
       @test length(Shelves.codex) > 0
       @test haskey(Shelves.codex, :n0)
       @test isa(get(Shelves.codex, :n0, 0), String)
-      @test isa(get(Shelves.codex, :k9, 0), Number)
+      @test isa(get(Shelves.codex, :k9, 0), Integer)
     end
 
   end

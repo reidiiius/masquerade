@@ -32,20 +32,24 @@ end
 
 
 function catalog()
-  local art = collect(keys(Shelves.codex))
-  sort!(art)
-  local columns = 7
-  let nth = 1
-    println()
-    for (nth, its) in enumerate(art)
-      print("\t", its)
-      if ==(nth % columns, 0)
+  try
+    local art = collect(keys(Shelves.codex))
+    sort!(art)
+    local columns = 7
+    let nth = 1
+      println()
+      for (nth, its) in enumerate(art)
+        print("\t", its)
+        if ==(nth % columns, 0)
+          println()
+        end
+      end
+      if !=(nth % columns, 0)
         println()
       end
     end
-    if !=(nth % columns, 0)
-      println()
-    end
+  catch anomaly
+    @warn anomaly
   end
 end
 
@@ -77,7 +81,7 @@ function pitch(seal::Symbol, nth::Int)
       return tacit()
     end
   catch anomaly
-    println("\nCause $anomaly")
+    @warn anomaly
   end
 end
 
@@ -128,8 +132,8 @@ end
 
 
 function unison(seal)
-  local cn = hermit(seal)
-  (cn, cn)
+  local ingot = hermit(seal)
+  (ingot, ingot)
 end
 
 
