@@ -33,6 +33,7 @@ module Softest
         :fabric,
         :atrium,
         :gamut,
+        :beagle,
         :catahoula,
         :normalize,
         :entryway,
@@ -46,6 +47,7 @@ module Softest
         Bandana.fabric,
         Bandana.atrium,
         Bandana.gamut,
+        Bandana.beagle,
         Bandana.catahoula,
         Bandana.normalize,
         Bandana.entryway,
@@ -82,6 +84,11 @@ module Softest
       @test isa(Bandana.gamut(record), Nothing)
     end
 
+    @testset "Bandana.beagle" begin
+      @test isa(Bandana.beagle("56"), Nothing)
+      @test isa(Bandana.beagle("99"), Nothing)
+    end
+
     @testset "Bandana.catahoula" begin
       @test isa(Bandana.catahoula("bead"), Function)
       @test isa(Bandana.catahoula("misfit"), Function)
@@ -103,6 +110,8 @@ module Softest
     @testset "Bandana.entryway" begin
       @test isa(Bandana.entryway("m3", "every"), Nothing)
       @test isa(Bandana.entryway(), Nothing)
+      @test isa(Bandana.entryway("query", "56"), Nothing)
+      @test isa(Bandana.entryway("query", "99"), Nothing)
       @test isa(Bandana.entryway("a4"), Nothing)
       @test isa(Bandana.entryway("n0"), Nothing)
       @test isa(Bandana.entryway("k9", "k2j17"), Nothing)

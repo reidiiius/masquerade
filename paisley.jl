@@ -20,25 +20,24 @@ end
 
 
 function tacit()
-  local mute = repeat("__ ", 12)
+  local mute::String = repeat("__ ", 12)
   bounds(length(mute)) ? mute : "Check tacit"
 end
 
 
 function sentinel(yarn::String)
-  local rex = r"^([ijkn]+\d+)+([lm]\d+)?[o-z]*$"
+  local rex::Regex = r"^([ijkn]+\d+)+([lm]\d+)?[o-z]*$"
   occursin(rex, lowercase(yarn))
 end
 
 
-function catalog()
+function catalog(things::Vector{Symbol})
   try
-    local art = collect(keys(Shelves.codex))
-    sort!(art)
-    local columns = 7
+    local sorted::Vector{Symbol} = sort(things)
+    local columns::UInt8 = 7
     let nth = 1
       println()
-      for (nth, its) in enumerate(art)
+      for (nth, its) in enumerate(sorted)
         print("\t", its)
         if ==(nth % columns, 0)
           println()
@@ -55,7 +54,7 @@ end
 
 
 function transmute!(cord::String)
-  local span = length(cord)
+  local span::UInt8 = length(cord)
   let line = SubString(cord, 1:span)
     if Shelves.trust
       for (old, new) in Shelves.duets
@@ -69,9 +68,9 @@ end
 
 function pitch(seal::Symbol, nth::Int)
   try
-    local wire = get(Shelves.codex, seal, tacit())
+    local wire::String = get(Shelves.codex, seal, tacit())
     if bounds(length(wire))
-      local cord = string(wire[nth:end], wire[1:nth + 1])
+      local cord::String = string(wire[nth:end], wire[1:nth + 1])
       if Shelves.latch
         return transmute!(cord)
       else

@@ -20,7 +20,11 @@ Command-line interface
 
 :
 
-    julia bandana.jl n0
+    julia bandana.jl query 0
+
+:
+
+    julia bandana.jl n0 n0yy
 
 :
 
@@ -48,7 +52,11 @@ REPL
 
 :
 
-    Bandana.entryway("n0")
+    Bandana.entryway("query", "0")
+
+:
+
+    Bandana.entryway("n0", "n0yy")
 
 :
 

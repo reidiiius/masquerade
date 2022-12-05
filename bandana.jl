@@ -46,12 +46,11 @@ end
 
 function gamut(record::Phylum)
   try
-    local hashed::Vector{Symbol} = collect(keys(Shelves.codex))
-    local sorted::Vector{Symbol} = sort(hashed)
+    local sorted::Vector{Symbol} = sort(collect(keys(Shelves.codex)))
     local zither::String = record.attune
     local cronus::String = Shelves.epoch
 
-    for sign in sorted
+    for sign::Symbol in sorted
       println("\n\t$zither-$sign-$cronus")
       for course::String in record.layout(sign)
         println("\t", course)
@@ -59,6 +58,24 @@ function gamut(record::Phylum)
     end
   catch anomaly
     @warn anomaly
+  end
+end
+
+
+function beagle(scent::String)
+  local sorted::Vector{Symbol} = sort(collect(keys(Shelves.codex)))
+  local things::Vector{Symbol} = Symbol[]
+
+  for aroma::Symbol in sorted
+    if occursin(scent, String(aroma))
+      push!(things, aroma)
+    end
+  end
+
+  if length(things) > 0
+    catalog(things)
+  else
+    println("\n\t$scent ?")
   end
 end
 
@@ -141,6 +158,9 @@ function entryway(args...)
 
       if head == "every" || head == "gamut"
         gamut(record)
+      elseif orchid == "query"
+        local scent = parade[1]
+        beagle(scent)
       else
         atrium(record)
       end
@@ -150,7 +170,8 @@ function entryway(args...)
     end
 
   else
-    catalog()
+    local things::Vector{Symbol} = collect(keys(Shelves.codex))
+    catalog(things)
   end
 end
 
