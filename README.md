@@ -28,7 +28,7 @@ Command-line interface
 
 :
 
-    julia bandana.jl j6 k5
+    julia bandana.jl group 89
 
 :
 
@@ -57,6 +57,10 @@ REPL
 :
 
     Bandana.entryway("n0", "n0yy")
+
+:
+
+    Bandana.entryway("group", "89")
 
 :
 

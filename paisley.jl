@@ -34,7 +34,7 @@ end
 function catalog(things::Vector{Symbol})
   try
     local sorted::Vector{Symbol} = sort(things)
-    local columns::UInt8 = 7
+    local columns::UInt8 = 8
     let nth = 1
       println()
       for (nth, its) in enumerate(sorted)

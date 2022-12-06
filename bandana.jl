@@ -62,13 +62,44 @@ function gamut(record::Phylum)
 end
 
 
+"Similar to Shelves.transmute!"
+function basset(scent::String)
+  local found::Vector{Symbol} = Symbol[]
+  local word::String
+
+  if Shelves.latch && Shelves.trust
+    word = uppercase(scent)
+
+    for (mode::Char, veil::Char) in Shelves.duets
+      word = replace(word, veil => mode)
+    end
+  else
+    word = lowercase(scent)
+  end
+
+  for (clef::Symbol, cord::String) in Shelves.codex
+    if occursin(word, cord)
+      push!(found, clef)
+    end
+  end
+
+  if length(found) > 0
+    catalog(found)
+  else
+    println("\n\t$scent ?")
+  end
+end
+
+
 function beagle(scent::String)
   local sorted::Vector{Symbol} = sort(collect(keys(Shelves.codex)))
   local things::Vector{Symbol} = Symbol[]
 
-  for aroma::Symbol in sorted
-    if occursin(scent, String(aroma))
-      push!(things, aroma)
+  if length(scent) < 9
+    for aroma::Symbol in sorted
+      if occursin(scent, String(aroma))
+        push!(things, aroma)
+      end
     end
   end
 
@@ -158,9 +189,10 @@ function entryway(args...)
 
       if head == "every" || head == "gamut"
         gamut(record)
+      elseif orchid == "group"
+        basset(head)
       elseif orchid == "query"
-        local scent = parade[1]
-        beagle(scent)
+        beagle(head)
       else
         atrium(record)
       end
@@ -176,13 +208,17 @@ function entryway(args...)
 end
 
 
-if length(ARGS) > 0
-  entryway(ARGS...)
+if isinteractive()
+  println(string("\n\t", uppercase("masquerade"), "\n"))
 else
-  entryway()
-end
+  if length(ARGS) > 0
+    entryway(ARGS...)
+  else
+    entryway()
+  end
 
-println()
+  println()
+end
 
 end # Bandana
 

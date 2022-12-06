@@ -33,6 +33,7 @@ module Softest
         :fabric,
         :atrium,
         :gamut,
+        :basset,
         :beagle,
         :catahoula,
         :normalize,
@@ -47,6 +48,7 @@ module Softest
         Bandana.fabric,
         Bandana.atrium,
         Bandana.gamut,
+        Bandana.basset,
         Bandana.beagle,
         Bandana.catahoula,
         Bandana.normalize,
@@ -82,6 +84,11 @@ module Softest
 
     @testset "Bandana.gamut" begin
       @test isa(Bandana.gamut(record), Nothing)
+    end
+
+    @testset "Bandana.basset" begin
+      @test isa(Bandana.basset("yq"), Nothing)
+      @test isa(Bandana.basset("Q4"), Nothing)
     end
 
     @testset "Bandana.beagle" begin
