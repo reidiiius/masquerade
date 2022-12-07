@@ -37,28 +37,26 @@ end
 
 
 function catalog(things::Vector{Symbol})
-  try
-    local sorted::Vector{Symbol} = sort(things)
-    local cycles::UInt8 = 0
-    local column::UInt8 = 7
+  local sorted::Vector{Symbol} = sort(things)
+  local cycles::UInt8 = 0
+  local column::UInt8 = 7
 
-    println()
-    for (numb::UInt8, sign::Symbol) in enumerate(sorted)
-      if numb % column == 0
-        print(string("\t", sign, "\n"))
-      else
-        print(string("\t", sign))
-      end
-
-      cycles = numb
+  println()
+  for (numb::UInt8, sign::Symbol) in enumerate(sorted)
+    if numb % column == 0
+      print(string("\t", sign, "\n"))
+    else
+      print(string("\t", sign))
     end
 
-    if cycles % column != 0
-      println()
-    end
-  catch anomaly
-    @warn anomaly
+    cycles = numb
   end
+
+  if cycles % column != 0
+    println()
+  end
+
+  return nothing
 end
 
 
@@ -97,52 +95,70 @@ function pitch(seal::Symbol, nth::Int)
 end
 
 
-function hermit(seal)
-  return pitch(seal, 1)
+function hermit(seal::Symbol)
+  local nylon::String = pitch(seal, 1)
+
+  return nylon
 end
 
 
-function jovian(seal)
-  return pitch(seal, 7)
+function jovian(seal::Symbol)
+  local nylon::String = pitch(seal, 7)
+
+  return nylon
 end
 
 
-function copper(seal)
-  return pitch(seal, 13)
+function copper(seal::Symbol)
+  local nylon::String = pitch(seal, 13)
+
+  return nylon
 end
 
 
-function saturn(seal)
-  return pitch(seal, 16)
+function saturn(seal::Symbol)
+  local nylon::String = pitch(seal, 16)
+
+  return nylon
 end
 
 
-function gemini(seal)
-  return pitch(seal, 19)
+function gemini(seal::Symbol)
+  local nylon::String = pitch(seal, 19)
+
+  return nylon
 end
 
 
-function helios(seal)
-  return pitch(seal, 22)
+function helios(seal::Symbol)
+  local nylon::String = pitch(seal, 22)
+
+  return nylon
 end
 
 
-function silver(seal)
-  return pitch(seal, 28)
+function silver(seal::Symbol)
+  local nylon::String = pitch(seal, 28)
+
+  return nylon
 end
 
 
-function aquari(seal)
-  return pitch(seal, 31)
+function aquari(seal::Symbol)
+  local nylon::String = pitch(seal, 31)
+
+  return nylon
 end
 
 
-function vulcan(seal)
-  return pitch(seal, 34)
+function vulcan(seal::Symbol)
+  local nylon::String = pitch(seal, 34)
+
+  return nylon
 end
 
 
-function unison(seal)
+function unison(seal::Symbol)
   local slips::NTuple{2, String}
   local ingot::String = hermit(seal)
 
@@ -151,7 +167,7 @@ function unison(seal)
 end
 
 
-function bfbfb(seal)
+function bfbfb(seal::Symbol)
   local slips::NTuple{5, String}
   local fn::String = saturn(seal)
   local bn::String = vulcan(seal)
@@ -161,7 +177,7 @@ function bfbfb(seal)
 end
 
 
-function cgdae(seal)
+function cgdae(seal::Symbol)
   local slips::NTuple{5, String}
 
   slips = (
@@ -175,7 +191,7 @@ function cgdae(seal)
 end
 
 
-function eadgbe(seal)
+function eadgbe(seal::Symbol)
   local slips::NTuple{6, String}
   local ingot::String = copper(seal)
 
@@ -191,7 +207,7 @@ function eadgbe(seal)
 end
 
 
-function fkbjdn(seal)
+function fkbjdn(seal::Symbol)
   local slips::NTuple{6, String}
   local dn::String = jovian(seal)
   local fk::String = gemini(seal)
@@ -202,7 +218,7 @@ function fkbjdn(seal)
 end
 
 
-function dragon(seal)
+function dragon(seal::Symbol)
   local slips::NTuple{9, String}
 
   slips = (
