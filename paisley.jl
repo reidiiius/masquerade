@@ -3,16 +3,6 @@ module Paisley
 
 include("shelves.jl")
 
-export bfbfb,
-       catalog,
-       cgdae,
-       dragon,
-       eadgbe,
-       fkbjdn,
-       sentinel,
-       tacit,
-       unison
-
 
 function bounds(span::Int)
   local bin::Bool = (35 < span < 61)
@@ -38,11 +28,11 @@ end
 
 function catalog(things::Vector{Symbol})
   local sorted::Vector{Symbol} = sort(things)
-  local cycles::UInt8 = 0
-  local column::UInt8 = 7
+  local cycles::UInt16 = 0
+  local column::UInt16 = 7
 
   println()
-  for (numb::UInt8, sign::Symbol) in enumerate(sorted)
+  for (numb::UInt16, sign::Symbol) in enumerate(sorted)
     if numb % column == 0
       print(string("\t", sign, "\n"))
     else
@@ -61,7 +51,7 @@ end
 
 
 function transmute!(cord::String)
-  local span::UInt8 = length(cord)
+  local span::UInt16 = length(cord)
   local line::String = lowercase(cord)
 
   if Shelves.trust

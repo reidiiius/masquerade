@@ -1,8 +1,6 @@
 
 module Shelves
 
-export codex, duets, epoch, latch, trust
-
 const epoch = Libc.strftime("h%s", time())::String
 
 const latch = true

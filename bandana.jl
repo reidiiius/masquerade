@@ -5,7 +5,6 @@ module Bandana
 include("shelves.jl")
 include("paisley.jl")
 
-using .Paisley
 
 struct Phylum
   attune::String
@@ -19,7 +18,7 @@ function fabric(record::Phylum, sign::String="i0")
   try
     local seal::Symbol = Symbol(sign)
 
-    if sentinel(sign) && haskey(Shelves.codex, seal)
+    if Paisley.sentinel(sign) && haskey(Shelves.codex, seal)
       local zither::String = record.attune
       local cronus::String = Shelves.epoch
       local diadem::String = "$zither-$sign-$cronus"
@@ -87,7 +86,7 @@ function basset(scent::String)
   end
 
   if length(found) > 0
-    catalog(found)
+    Paisley.catalog(found)
   else
     println("\n\t$scent ?")
   end
@@ -108,7 +107,7 @@ function beagle(scent::String)
   end
 
   if length(things) > 0
-    catalog(things)
+    Paisley.catalog(things)
   else
     println("\n\t$scent ?")
   end
@@ -123,34 +122,34 @@ function catahoula(scent::String)
     scent == "b5" ||
     occursin(r"^(bf)+b?$", scent) ||
     occursin(r"^tritone?$", scent)
-    pref = bfbfb
+    pref = Paisley.bfbfb
 
   elseif scent == "cello" ||
     scent == "p5" ||
     occursin(r"^.*gda.*$", scent) ||
     occursin(r"^mando.*", scent) ||
     occursin(r"^viol.*", scent)
-    pref = cgdae
+    pref = Paisley.cgdae
 
   elseif scent == "gtr" ||
     occursin(r"^g.*it.*r$", scent) ||
     occursin(r"^.*dgbe.*$", scent) ||
     occursin(r"^.*gcea.*$", scent) ||
     occursin(r"^uk[ue](le)*$", scent)
-    pref = eadgbe
+    pref = Paisley.eadgbe
 
   elseif scent == "fkbjdn" ||
     scent == "m3"
-    pref = fkbjdn
+    pref = Paisley.fkbjdn
 
   elseif scent == "bass" ||
     scent == "p4" ||
     occursin(r"^dra[cg]o.*$", scent) ||
     occursin(r"^.*eadg.*$", scent)
-    pref = dragon
+    pref = Paisley.dragon
 
   else
-    pref = unison
+    pref = Paisley.unison
   end
 
   return pref
@@ -175,11 +174,11 @@ end
 function entryway(args...)
   local circus::Vector{String} = collect(args)
   local parade::Vector{String} = normalize(circus)
-  local dexter::UInt8 = length(parade)
+  local dexter::UInt16 = length(parade)
 
   # defaults
   local attune::String = "guitar"
-  local layout::Function = eadgbe
+  local layout::Function = Paisley.eadgbe
 
   if dexter > 0
     local orchid::String = parade[1]
@@ -188,7 +187,7 @@ function entryway(args...)
     if dexter == 1
       record = Phylum(attune, layout, parade)
       fabric(record, orchid)
-    elseif !sentinel(orchid)
+    elseif !Paisley.sentinel(orchid)
       popfirst!(parade)
 
       record = Phylum(orchid, catahoula(orchid), parade)
@@ -210,7 +209,7 @@ function entryway(args...)
 
   else
     local things::Vector{Symbol} = collect(keys(Shelves.codex))
-    catalog(things)
+    Paisley.catalog(things)
   end
 end
 
