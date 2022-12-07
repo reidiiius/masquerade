@@ -14,6 +14,7 @@ struct Phylum
 end
 
 
+"Format and print selected matrix to screen."
 function fabric(record::Phylum, sign::String="i0")
   try
     local seal::Symbol = Symbol(sign)
@@ -37,6 +38,7 @@ function fabric(record::Phylum, sign::String="i0")
 end
 
 
+"Helper for variadic arguments."
 function atrium(record::Phylum)
   for sign::String in record.parade
     fabric(record, sign)
@@ -44,6 +46,7 @@ function atrium(record::Phylum)
 end
 
 
+"Format and print all matrices to screen."
 function gamut(record::Phylum)
   try
     local sorted::Vector{Symbol} = sort(collect(keys(Shelves.codex)))
@@ -62,7 +65,7 @@ function gamut(record::Phylum)
 end
 
 
-"Similar to Shelves.transmute!"
+"Search through dictionary values."
 function basset(scent::String)
   local found::Vector{Symbol} = Symbol[]
   local word::String
@@ -91,6 +94,7 @@ function basset(scent::String)
 end
 
 
+"Search through dictionary keys."
 function beagle(scent::String)
   local sorted::Vector{Symbol} = sort(collect(keys(Shelves.codex)))
   local things::Vector{Symbol} = Symbol[]
@@ -111,6 +115,7 @@ function beagle(scent::String)
 end
 
 
+"Parse option and return reference."
 function catahoula(scent::String)
   local pref::Function
 
@@ -152,6 +157,7 @@ function catahoula(scent::String)
 end
 
 
+"Limit input data and return validated."
 function normalize(circus::Vector)
   local parade::Vector{String} = String[]
 
@@ -165,6 +171,7 @@ function normalize(circus::Vector)
 end
 
 
+"Entry point receives command arguments."
 function entryway(args...)
   local circus::Vector{String} = collect(args)
   local parade::Vector{String} = normalize(circus)
