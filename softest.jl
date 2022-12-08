@@ -147,10 +147,10 @@ module Softest
         @test isa(Paisley.transmute!("rv wq __ us"), String)
       end
 
-      @testset "Paisley.pitch" begin
-        @test isdefined(Paisley, :pitch)
-        @test isa(Paisley.pitch, Function)
-        @test isa(Paisley.pitch(:n0, 1), String)
+      @testset "Paisley.pegasus" begin
+        @test isdefined(Paisley, :pegasus)
+        @test isa(Paisley.pegasus, Function)
+        @test isa(Paisley.pegasus(:n0, 1), String)
       end
 
       @testset "Paisley Pitches" begin

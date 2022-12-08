@@ -4,6 +4,7 @@ module Paisley
 include("shelves.jl")
 
 
+"Integer within range?"
 function bounds(span::Int)
   local bin::Bool = (35 < span < 61)
 
@@ -11,6 +12,7 @@ function bounds(span::Int)
 end
 
 
+"Default string."
 function tacit()
   local mute::String = repeat("__ ", 12)
 
@@ -18,6 +20,7 @@ function tacit()
 end
 
 
+"Validate key signature."
 function sentinel(yarn::String)
   local rex::Regex = r"^([ijkn]+\d+)+([lm]\d+)?[o-z]*$"
   local bin::Bool = occursin(rex, lowercase(yarn))
@@ -26,6 +29,7 @@ function sentinel(yarn::String)
 end
 
 
+"Format and print menu of signatures."
 function catalog(things::Vector{Symbol})
   local sorted::Vector{Symbol} = sort(things)
   local cycles::UInt16 = 0
@@ -50,6 +54,7 @@ function catalog(things::Vector{Symbol})
 end
 
 
+"Replacement of characters."
 function transmute!(cord::String)
   local span::UInt16 = length(cord)
   local line::String = lowercase(cord)
@@ -64,7 +69,8 @@ function transmute!(cord::String)
 end
 
 
-function pitch(seal::Symbol, nth::Int)
+"Permutation of selected string."
+function pegasus(seal::Symbol, nth::Int)
   try
     local wire::String = get(Shelves.codex, seal, tacit())
 
@@ -85,69 +91,61 @@ function pitch(seal::Symbol, nth::Int)
 end
 
 
+"Tune string to C natural."
 function hermit(seal::Symbol)
-  local nylon::String = pitch(seal, 1)
-
-  return nylon
+  return pegasus(seal, 1)::String
 end
 
 
+"Tune string to D natural."
 function jovian(seal::Symbol)
-  local nylon::String = pitch(seal, 7)
-
-  return nylon
+  return pegasus(seal, 7)::String
 end
 
 
+"Tune string to E natural."
 function copper(seal::Symbol)
-  local nylon::String = pitch(seal, 13)
-
-  return nylon
+  return pegasus(seal, 13)::String
 end
 
 
+"Tune string to F natural."
 function saturn(seal::Symbol)
-  local nylon::String = pitch(seal, 16)
-
-  return nylon
+  return pegasus(seal, 16)::String
 end
 
 
+"Tune string to F sharp."
 function gemini(seal::Symbol)
-  local nylon::String = pitch(seal, 19)
-
-  return nylon
+  return pegasus(seal, 19)::String
 end
 
 
+"Tune string to G natural."
 function helios(seal::Symbol)
-  local nylon::String = pitch(seal, 22)
-
-  return nylon
+  return pegasus(seal, 22)::String
 end
 
 
+"Tune string to A natural."
 function silver(seal::Symbol)
-  local nylon::String = pitch(seal, 28)
-
-  return nylon
+  return pegasus(seal, 28)::String
 end
 
 
+"Tune string to A sharp."
 function aquari(seal::Symbol)
-  local nylon::String = pitch(seal, 31)
-
-  return nylon
+  return pegasus(seal, 31)::String
 end
 
 
+"Tune string to B natural."
 function vulcan(seal::Symbol)
-  local nylon::String = pitch(seal, 34)
-
-  return nylon
+  return pegasus(seal, 34)::String
 end
 
 
+"Unison tuning."
 function unison(seal::Symbol)
   local slips::NTuple{2, String}
   local ingot::String = hermit(seal)
@@ -157,6 +155,7 @@ function unison(seal::Symbol)
 end
 
 
+"Augmented fourths tuning."
 function bfbfb(seal::Symbol)
   local slips::NTuple{5, String}
   local fn::String = saturn(seal)
@@ -167,6 +166,7 @@ function bfbfb(seal::Symbol)
 end
 
 
+"Perfect fifths tuning."
 function cgdae(seal::Symbol)
   local slips::NTuple{5, String}
 
@@ -181,6 +181,7 @@ function cgdae(seal::Symbol)
 end
 
 
+"Guitar Standard tuning."
 function eadgbe(seal::Symbol)
   local slips::NTuple{6, String}
   local ingot::String = copper(seal)
@@ -197,6 +198,7 @@ function eadgbe(seal::Symbol)
 end
 
 
+"Major thirds tuning."
 function fkbjdn(seal::Symbol)
   local slips::NTuple{6, String}
   local dn::String = jovian(seal)
@@ -208,6 +210,7 @@ function fkbjdn(seal::Symbol)
 end
 
 
+"Perfect fourths tuning."
 function dragon(seal::Symbol)
   local slips::NTuple{9, String}
 
