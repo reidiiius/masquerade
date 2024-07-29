@@ -31,7 +31,6 @@ const trust = isequal(length(model), length(veils))
 const duets = zip(model, veils)
 
 const codex = Dict(
-    :i0       => "__ __ __ __ __ __ __ __ __ __ __ __ ",
     :j136l7   => "__ __ tw xr __ wt __ uv yq so __ qy ",
     :j167l2   => "vu __ __ __ rx wt __ uv yq __ os qy ",
     :j17l2    => "vs __ __ __ rw wr __ ut __ sv oq qo ",
@@ -48,6 +47,7 @@ const codex = Dict(
     :j246l3   => "vv zq to __ ry __ __ uw yr __ __ qz ",
     :j256     => "qr vp __ __ pv rq wo __ uy __ __ ow ",
     :j25l6    => "or qp __ __ tv pq ro ws __ __ __ sw ",
+    :j25vt    => "or qp vt __ tv pq ro __ __ uu __ sw ",
     :j25      => "qr vp __ __ pv rq wo __ __ yu __ ow ",
     :j26l34   => "vv zq to xs __ __ __ uw yr __ __ qz ",
     :j26l3    => "vv zq to __ __ wu __ uw yr __ __ qz ",
